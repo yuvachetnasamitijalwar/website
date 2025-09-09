@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>क्विज प्रतियोगिता पंजीकरण- 2026</title>
+  <style>
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff9a9e 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #333;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated background particles */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2px, transparent 0),
+                        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 0);
+      background-size: 50px 50px;
+      animation: particleFloat 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes particleFloat {
+      0% { transform: translateY(0) translateX(0); }
+      25% { transform: translateY(-20px) translateX(10px); }
+      50% { transform: translateY(-40px) translateX(-5px); }
+      75% { transform: translateY(-20px) translateX(-10px); }
+      100% { transform: translateY(0) translateX(0); }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.15), 
+                  0 0 0 1px rgba(255,255,255,0.2);
+      max-width: 550px;
+      width: 100%;
+      padding: 45px 35px;
+      animation: slideUpFade 1s ease-out;
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    @keyframes slideUpFade {
+      0% { 
+        opacity: 0; 
+        transform: translateY(50px) scale(0.95);
+      }
+      100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .header { 
+      text-align: center; 
+      position: relative; 
+      margin-bottom: 30px; 
+      user-select: none; 
+    }
+
+    .header div.logo-title {
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      gap: 15px; 
+      margin-bottom: 10px;
+    }
+
+    .header div.logo-title img.logo {
+      height: 160px;
+      width: auto;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .header div.logo-title img.logo:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    .header h1 {
+      font-size: 2.9rem; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff9a9e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px; 
+      display: flex; 
+      align-items: center; 
+      gap: 12px;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .quiz-icon { 
+      font-size: 3rem; 
+      animation: bounceRotate 3s infinite ease-in-out; 
+    }
+
+    @keyframes bounceRotate {
+      0%, 20%, 50%, 80%, 100% { 
+        transform: translateY(0) rotate(0deg);
+      }
+      10% { 
+        transform: translateY(-8px) rotate(5deg);
+      }
+      30% { 
+        transform: translateY(-15px) rotate(-5deg);
+      }
+      40% { 
+        transform: translateY(-8px) rotate(3deg);
+      }
+      60% { 
+        transform: translateY(-10px) rotate(-3deg);
+      }
+    }
+
+    .header p { 
+      font-size: 1.2rem; 
+      color: #666; 
+      opacity: 0.9; 
+      font-weight: 500;
+      margin-top: 8px;
+    }
+
+    form { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 22px; 
+    }
+
+    .form-group { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 8px; 
+      position: relative;
+    }
+
+    .form-group::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #667eea, transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .form-group:focus-within::before {
+      opacity: 1;
+    }
+
+    label { 
+      font-weight: 600; 
+      font-size: 1rem; 
+      color: #444; 
+      margin-bottom: 5px;
+      position: relative;
+      display: inline-block;
+    }
+
+    label::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      transition: width 0.3s ease;
+    }
+
+    .form-group:focus-within label::after {
+      width: 100%;
+    }
+
+    input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select, textarea {
+      padding: 16px 20px; 
+      font-size: 1.1rem; 
+      border: 2px solid #e1e5e9; 
+      border-radius: 15px;
+      background: #f8f9fa; 
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="number"]:focus,
+    select:focus, textarea:focus {
+      border-color: #667eea;
+      background: white;
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1),
+                  0 8px 25px rgba(102, 126, 234, 0.15);
+      transform: translateY(-3px) scale(1.01);
+    }
+
+    input[type="text"]:valid:not(:placeholder-shown), 
+    input[type="email"]:valid:not(:placeholder-shown), 
+    input[type="tel"]:valid:not(:placeholder-shown), 
+    input[type="number"]:valid:not(:placeholder-shown) {
+      border-color: #28a745;
+      background: #f8fff9;
+    }
+
+    input[type="text"]:valid:not(:placeholder-shown)::after, 
+    input[type="email"]:valid:not(:placeholder-shown)::after, 
+    input[type="tel"]:valid:not(:placeholder-shown)::after, 
+    input[type="number"]:valid:not(:placeholder-shown)::after {
+      content: '✓';
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #28a745;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    select[multiple] { 
+      height: 120px; 
+      padding: 10px;
+    }
+
+    select option:checked {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+    }
+
+    textarea { 
+      resize: vertical; 
+      min-height: 80px; 
+      font-family: inherit; 
+      line-height: 1.5;
+    }
+
+    .checkbox-group { 
+      display: flex; 
+      align-items: center; 
+      gap: 12px; 
+      user-select: none;
+      padding: 10px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .checkbox-group:hover {
+      background-color: rgba(102, 126, 234, 0.05);
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 22px; 
+      height: 22px; 
+      accent-color: #667eea; 
+      cursor: pointer; 
+      flex-shrink: 0; 
+      transition: all 0.3s ease;
+      border-radius: 4px;
+    }
+
+    .checkbox-group input[type="checkbox"]:hover { 
+      transform: scale(1.15);
+      box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+    }
+
+    .checkbox-group input[type="checkbox"]:checked {
+      animation: checkBounce 0.3s ease;
+    }
+
+    @keyframes checkBounce {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1.1); }
+    }
+
+    .checkbox-group label {
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    button.submit-btn {
+      margin-top: 15px;
+      padding: 18px;
+      width: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff9a9e 100%);
+      color: white;
+      border: none;
+      border-radius: 18px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button.submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    button.submit-btn:hover::before {
+      transform: translateX(100%);
+    }
+
+    button.submit-btn:hover { 
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6); 
+      transform: translateY(-4px) scale(1.02);
+    }
+
+    button.submit-btn:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+
+    .success-message {
+      margin-top: 25px;
+      background: linear-gradient(135deg, #56cc9d 0%, #6cc04a 100%);
+      color: white;
+      padding: 0;
+      border-radius: 18px;
+      font-weight: 600;
+      text-align: center;
+      user-select: none;
+      display: none;
+      box-shadow: 0 8px 25px rgba(86, 204, 157, 0.4);
+      animation: successSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .success-message::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+      transform: translateX(-100%);
+      animation: successShimmer 2s ease-in-out infinite;
+    }
+
+    @keyframes successShimmer {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .success-message img {
+      margin: 15px 0 15px 0;
+      width: 200px;
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .success-message img:hover {
+      transform: scale(1.05);
+    }
+
+    .success-message .payment-info {
+      text-align: center;
+      font-size: 1.1em;
+      color: #fff;
+      background: rgba(79,172,254,0.9);
+      border-radius: 10px;
+      padding: 12px 18px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+    }
+
+    .success-message .payment-info b {
+      color: #fcd13a;
+      font-weight: 700;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .success-message .payment-info1 {
+      color: #ffef9f;
+      display: block;
+      margin-top: 10px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    @keyframes successSlideIn {
+      0% { 
+        opacity: 0; 
+        transform: translateY(-30px) scale(0.9);
+      }
+      100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Enhanced mobile responsiveness */
+    @media (max-width: 600px) {
+      .container {
+        padding: 35px 25px;
+        margin: 10px;
+        border-radius: 20px;
+      }
+      .header div.logo-title {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .header h1 {
+        font-size: 2.2rem;
+        text-align: center;
+      }
+      .header div.logo-title img.logo {
+        height: 120px;
+      }
+      input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select, textarea {
+        padding: 14px 16px;
+        font-size: 1rem;
+      }
+      button.submit-btn {
+        padding: 16px;
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Loading animation for form submission */
+    .loading {
+      position: relative;
+      pointer-events: none;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Enhanced focus indicators */
+    input:focus, select:focus, textarea:focus {
+      position: relative;
+    }
+
+    /* Custom scrollbar for select multiple */
+    select[multiple]::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    select[multiple]::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+
+    select[multiple]::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 4px;
+    }
+
+    select[multiple]::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #5a6fd8, #6a4190);
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-labelledby="formTitle">
+    <div class="header">
+      <div class="logo-title">
+        <a href="https://imgbb.com/" target="_blank" rel="noopener noreferrer">
+          <img class="logo" src="images/quiz_logo.jpg" alt="quiz logo" border="0" />
+        </a>
+        <h1 id="formTitle">
+          <span class="quiz-icon">🏆</span>
+          क्विज प्रतियोगिता- 2026
+        </h1>
+      </div>
+      <p>युवा चेतना समिति, राम-जानकी मंदिर जलवार !!</p>
+    </div>
+    <form id="quizForm" novalidate>
+      <div class="form-group">
+        <label for="firstName">First Name *</label>
+        <input type="text" id="firstName" name="firstName" required autocomplete="given-name" placeholder="अपना पहला नाम दर्ज करें" />
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name *</label>
+        <input type="text" id="lastName" name="lastName" required autocomplete="family-name" placeholder="अपना अंतिम नाम दर्ज करें" />
+      </div>
+
+      <div class="form-group">
+        <label for="fatherName">Father's Name *</label>
+        <input type="text" id="fatherName" name="fatherName" required placeholder="अपने पिता का नाम दर्ज करें" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required autocomplete="email" placeholder="example@email.com" />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+91 12345 67890" />
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age *</label>
+        <input type="number" id="age" name="age" min="13" max="100" required placeholder="आपकी उम्र" />
+      </div>
+
+      <div class="form-group">
+        <label for="organization">School/College/Organization *</label>
+        <input type="text" id="organization" name="organization" required placeholder="आपके स्कूल/कॉलेज का नाम" />
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address *</label>
+        <input type="text" id="address" name="address" required placeholder="आपका पूरा पता" />
+      </div>
+
+      <div class="form-group">
+        <label for="category">Competition Category *</label>
+        <select id="category" name="category" required>
+          <option value="">Select Category</option>
+          <option value="class5to8">Class 5th to 8th</option>
+          <option value="class9to12">Class 9th to 12th</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="class">Class *</label>
+        <select id="class" name="class" required>
+          <option value="">Select Class</option>
+          <option value="5">Class 5</option>
+          <option value="6">Class 6</option>
+          <option value="7">Class 7</option>
+          <option value="8">Class 8</option>
+          <option value="9">Class 9</option>
+          <option value="10">Class 10</option>
+          <option value="11">Class 11</option>
+          <option value="12">Class 12</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="subjects">Preferred Subject Areas (Optional)</label>
+        <select id="subjects" name="subjects" multiple aria-multiselectable="true" size="6">
+          <option value="science">Science & Technology</option>
+          <option value="history">History & Geography</option>
+          <option value="literature">Literature & Arts</option>
+          <option value="sports">Sports & Entertainment</option>
+          <option value="current">Current Affairs</option>
+          <option value="general">General Knowledge</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="experience">Previous Quiz Experience (Optional)</label>
+        <textarea id="experience" name="experience" rows="3" placeholder="अपने क्विज़ प्रतियोगिता के अनुभव के बारे में बताएं..."></textarea>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="terms" name="terms" required aria-required="true" />
+        <label for="terms">I agree to the terms and conditions and privacy policy *</label>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="newsletter" name="newsletter" />
+        <label for="newsletter">Subscribe to our newsletter for quiz updates</label>
+      </div>
+
+      <button type="submit" class="submit-btn" aria-label="Register for Quiz Competition">
+        🚀 Register for Quiz Competition 🚀
+      </button>
+
+      <div class="success-message" id="successMessage" role="alert" aria-live="assertive">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          
+          <div class="payment-info">
+            🎉 Registration Successful!<br>Check your email for confirmation details.
+            <span class="payment-info1">
+              You can make payment online.<br>
+              <span style="color:#fff;font-weight:500;">
+                And if you make online payment, make sure to share payment details on WhatsApp no. <b>+91 9263613438</b>
+              </span>
+            </span>
+          </div>
+          <img src="images/qr_code.jpg"
+              alt="WhatsApp Payment QR" style="width: 200px; max-width:90%; border-radius:12px; box-shadow: 0 6px 20px rgba(0,0,0,0.15);" />
+          
+          <div style="margin-top:18px;font-size:1.15em;color:#251abf;font-weight:600;">
+            😊 आप जैसे प्रतिभावान छात्र को हमारी शुभकामनाएँ! आगे बढ़िए और अपनी काबिलियत दिखाइए! 🚀
+             <span style="color:#251abf;font-weight:600;;">— युवा चेतना समिति की ओर से ढेरों शुभकामनाएँ! 🎊</span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script>
+    document.getElementById('quizForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // Add loading state
+      const submitBtn = this.querySelector('.submit-btn');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = 'Processing...';
+      submitBtn.classList.add('loading');
+
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const fatherName = document.getElementById('fatherName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const age = parseInt(document.getElementById('age').value);
+      const organization = document.getElementById('organization').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const category = document.getElementById('category').value;
+      const studentClass = document.getElementById('class').value;
+
+      let subjects = [];
+      const subjectsSelect = document.getElementById('subjects');
+      for (let option of subjectsSelect.options) {
+        if (option.selected) subjects.push(option.value);
+      }
+
+      const experience = document.getElementById('experience').value || '';
+      const termsAgreed = document.getElementById('terms').checked;
+      const subscribedNewsletter = document.getElementById('newsletter').checked;
+
+      if (!termsAgreed) {
+        alert('Please agree to the terms and conditions and privacy policy to register.');
+        submitBtn.innerHTML = originalText;
+        submitBtn.classList.remove('loading');
+        return;
+      }
+
+      const data = {
+        name: firstName + ' ' + lastName,
+        fatherName,
+        email,
+        phone,
+        age,
+        organization,
+        address,
+        category,
+        class: studentClass,
+        subjects,
+        experience,
+        termsAgreed,
+        subscribedNewsletter
+      };
+
+      try {
+        const response = await fetch('https://quiz-backend-nhyn.onrender.com/api/quiz/register', {
+
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          document.getElementById('successMessage').style.display = 'block';
+          this.reset();
+          // Scroll to success message
+          document.getElementById('successMessage').scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+          });
+
+        } else {
+          alert('Registration failed: ' + (result.error || 'Unknown error'));
+        }
+      } catch (error) {
+        alert('Network/server error: ' + error.message);
+      } finally {
+        // Remove loading state
+        submitBtn.innerHTML = originalText;
+        submitBtn.classList.remove('loading');
+      }
+    });
+
+    // Add real-time validation feedback
+    const inputs = document.querySelectorAll('input[required], select[required]');
+    inputs.forEach(input => {
+      input.addEventListener('blur', function() {
+        if (this.checkValidity()) {
+          this.style.borderColor = '#28a745';
+          this.style.backgroundColor = '#f8fff9';
+        } else {
+          this.style.borderColor = '#dc3545';
+          this.style.backgroundColor = '#fff5f5';
+        }
+      });
+
+      input.addEventListener('input', function() {
+        if (this.style.borderColor === '#dc3545' && this.checkValidity()) {
+          this.style.borderColor = '#28a745';
+          this.style.backgroundColor = '#f8fff9';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
