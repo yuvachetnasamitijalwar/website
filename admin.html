@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Admin Panel</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; }
+    th { background: #f5f5f5; }
+    .error { color: red; margin-bottom: 10px; }
+    button { padding: 12px 25px; background: #4CAF50; color: white; border: none; border-radius: 5px; margin-bottom: 15px; cursor: pointer; }
+    button:hover { background: #388e3c; }
+  </style>
+</head>
+<body>
+  <h2>Quiz Registrations Admin Panel</h2>
+  <button onclick="loadRegistrations()">🔄 Refresh</button>
+  <div class="error" id="error"></div>
+  <div id="regTable"></div>
+  <script>
+    async function loadRegistrations() {
+      document.getElementById('error').textContent = "";
+      document.getElementById('regTable').innerHTML = "Loading...";
+      try {
+        const response = await fetch('https://quiz-backend-nhyn.onrender.com/api/admin/users');
+        if (!response.ok) throw new Error('Failed to load data: HTTP ' + response.status);
+        const users = await response.json();
+        if (!users.length) {
+          document.getElementById('regTable').innerHTML = "<p>No registrations found.</p>";
+          return;
+        }
+        let html = `<table>
+          <tr>
+            <th>Sr.</th>
+            <th>Name</th>
+            <th>Father's Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Class</th>
+            <th>Category</th>
+            <th>School</th>
+          </tr>`;
+        users.forEach((u, i) => {
+          html += `<tr>
+            <td>${i + 1}</td>
+            <td>${u.firstName || ''} ${u.lastName || ''}</td>
+            <td>${u.fatherName || ''}</td>
+            <td>${u.email || ''}</td>
+            <td>${u.phone || ''}</td>
+            <td>${u.class || ''}</td>
+            <td>${u.category || ''}</td>
+            <td>${u.school || ''}</td>
+          </tr>`;
+        });
+        html += `</table>`;
+        document.getElementById('regTable').innerHTML = html;
+      } catch (e) {
+        document.getElementById('error').textContent = e.message;
+        document.getElementById('regTable').innerHTML = "";
+      }
+    }
+    // Auto-load when page opens
+    window.onload = loadRegistrations;
+  </script>
+</body>
+</html>
