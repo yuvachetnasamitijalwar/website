@@ -723,13 +723,14 @@
         const result = await response.json();
 
         if (response.ok) {
-          document.getElementById('successMessage').style.display = 'block';
+         // New tab में success.html open करने के लिए
+          window.open('success.html', '_blank');
+
+          // Form reset करने के लिए (optional)
           this.reset();
-          // Scroll to success message
-          document.getElementById('successMessage').scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'center' 
-          });
+
+        // Confirmation message (optional)
+        alert('Registration successful! Check the new tab for payment details.');
 
         } else {
           alert('Registration failed: ' + (result.error || 'Unknown error'));
