@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>क्विज प्रतियोगिता पंजीकरण- 2026</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    /* Reset and Basic Styles */
     * { 
       margin: 0; 
       padding: 0; 
@@ -13,18 +15,19 @@
     }
 
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff9a9e 100%);
+      background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); /* Calm blue gradient background */
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
-      color: #333;
+      color: #333; 
       position: relative;
       overflow-x: hidden;
+      font-size: 16px;
     }
 
-    /* Animated background particles */
+    /* Subtle background pattern */
     body::before {
       content: '';
       position: fixed;
@@ -32,45 +35,25 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2px, transparent 0),
-                        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 0);
-      background-size: 50px 50px;
-      animation: particleFloat 20s linear infinite;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px),
+                  radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
       z-index: 0;
     }
 
-    @keyframes particleFloat {
-      0% { transform: translateY(0) translateX(0); }
-      25% { transform: translateY(-20px) translateX(10px); }
-      50% { transform: translateY(-40px) translateX(-5px); }
-      75% { transform: translateY(-20px) translateX(-10px); }
-      100% { transform: translateY(0) translateX(0); }
-    }
-
     .container {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.95); /* Clean white with transparency */
       border-radius: 25px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.15), 
-                  0 0 0 1px rgba(255,255,255,0.2);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.2), 
+                  0 0 0 1px rgba(0,0,0,0.1);
       max-width: 550px;
       width: 100%;
       padding: 45px 35px;
-      animation: slideUpFade 1s ease-out;
       position: relative;
       z-index: 1;
-      border: 1px solid rgba(255,255,255,0.3);
-    }
-
-    @keyframes slideUpFade {
-      0% { 
-        opacity: 0; 
-        transform: translateY(50px) scale(0.95);
-      }
-      100% { 
-        opacity: 1; 
-        transform: translateY(0) scale(1);
-      }
+      border: 1px solid rgba(0,0,0,0.1);
+      overflow: hidden;
     }
 
     .header { 
@@ -82,6 +65,7 @@
 
     .header div.logo-title {
       display: flex; 
+      flex-direction: column;
       justify-content: center; 
       align-items: center; 
       gap: 15px; 
@@ -93,53 +77,35 @@
       width: auto;
       border-radius: 15px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
     .header div.logo-title img.logo:hover {
       transform: scale(1.05) rotate(2deg);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
 
     .header h1 {
       font-size: 2.9rem; 
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff9a9e 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #0d47a1; /* Dark blue for title */
       letter-spacing: 2px; 
       display: flex; 
       align-items: center; 
       gap: 12px;
       font-weight: 700;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-shadow: 0 0 8px rgba(13, 71, 161, 0.3); 
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .quiz-icon { 
       font-size: 3rem; 
-      animation: bounceRotate 3s infinite ease-in-out; 
-    }
-
-    @keyframes bounceRotate {
-      0%, 20%, 50%, 80%, 100% { 
-        transform: translateY(0) rotate(0deg);
-      }
-      10% { 
-        transform: translateY(-8px) rotate(5deg);
-      }
-      30% { 
-        transform: translateY(-15px) rotate(-5deg);
-      }
-      40% { 
-        transform: translateY(-8px) rotate(3deg);
-      }
-      60% { 
-        transform: translateY(-10px) rotate(-3deg);
-      }
+      color: #0d47a1; /* Dark blue for icon */
     }
 
     .header p { 
       font-size: 1.2rem; 
-      color: #666; 
+      color: #555; 
       opacity: 0.9; 
       font-weight: 500;
       margin-top: 8px;
@@ -158,64 +124,36 @@
       position: relative;
     }
 
-    .form-group::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #667eea, transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .form-group:focus-within::before {
-      opacity: 1;
-    }
-
     label { 
       font-weight: 600; 
       font-size: 1rem; 
-      color: #444; 
+      color: #495057; 
       margin-bottom: 5px;
-      position: relative;
-      display: inline-block;
+      transition: color 0.3s ease;
     }
 
-    label::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      transition: width 0.3s ease;
-    }
-
-    .form-group:focus-within label::after {
-      width: 100%;
+    .form-group:focus-within label {
+      color: #0d47a1; /* Dark blue on focus */
     }
 
     input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select, textarea {
       padding: 16px 20px; 
       font-size: 1.1rem; 
-      border: 2px solid #e1e5e9; 
+      border: 2px solid #ced4da; 
       border-radius: 15px;
       background: #f8f9fa; 
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
+      color: #495057;
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
     }
 
     input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="number"]:focus,
     select:focus, textarea:focus {
-      border-color: #667eea;
-      background: white;
+      border-color: #0d47a1; /* Dark blue border on focus */
+      background: #ffffff;
       outline: none;
-      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1),
-                  0 8px 25px rgba(102, 126, 234, 0.15);
+      box-shadow: 0 0 0 4px rgba(13, 71, 161, 0.2),
+                  0 8px 25px rgba(13, 71, 161, 0.1);
       transform: translateY(-3px) scale(1.01);
     }
 
@@ -223,22 +161,8 @@
     input[type="email"]:valid:not(:placeholder-shown), 
     input[type="tel"]:valid:not(:placeholder-shown), 
     input[type="number"]:valid:not(:placeholder-shown) {
-      border-color: #28a745;
-      background: #f8fff9;
-    }
-
-    input[type="text"]:valid:not(:placeholder-shown)::after, 
-    input[type="email"]:valid:not(:placeholder-shown)::after, 
-    input[type="tel"]:valid:not(:placeholder-shown)::after, 
-    input[type="number"]:valid:not(:placeholder-shown)::after {
-      content: '✓';
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #28a745;
-      font-weight: bold;
-      font-size: 1.2rem;
+      border-color: #2e7d32; /* Dark green for valid input */
+      box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.2);
     }
 
     select[multiple] { 
@@ -246,11 +170,17 @@
       padding: 10px;
     }
 
+    select option {
+        padding: 8px 12px;
+        background-color: #f8f9fa;
+        color: #343a40;
+    }
+    
     select option:checked {
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: #2e7d32;
       color: white;
     }
-
+    
     textarea { 
       resize: vertical; 
       min-height: 80px; 
@@ -269,22 +199,23 @@
     }
 
     .checkbox-group:hover {
-      background-color: rgba(102, 126, 234, 0.05);
+      background-color: rgba(13, 71, 161, 0.05);
     }
 
     .checkbox-group input[type="checkbox"] {
       width: 22px; 
       height: 22px; 
-      accent-color: #667eea; 
+      accent-color: #0d47a1; /* Dark blue accent */
       cursor: pointer; 
       flex-shrink: 0; 
       transition: all 0.3s ease;
       border-radius: 4px;
+      border: 2px solid #adb5bd;
     }
 
     .checkbox-group input[type="checkbox"]:hover { 
       transform: scale(1.15);
-      box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 0 10px rgba(13, 71, 161, 0.3);
     }
 
     .checkbox-group input[type="checkbox"]:checked {
@@ -301,133 +232,56 @@
       cursor: pointer;
       font-size: 1rem;
       line-height: 1.4;
+      color: #495057;
     }
 
     button.submit-btn {
       margin-top: 15px;
       padding: 18px;
       width: 100%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff9a9e 100%);
-      color: white;
+      background: #4caf50; /* Green button */
+      color: #fff; 
       border: none;
       border-radius: 18px;
       font-weight: 700;
       font-size: 1.2rem;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       user-select: none;
       position: relative;
       overflow: hidden;
-    }
-
-    button.submit-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.6s ease;
-    }
-
-    button.submit-btn:hover::before {
-      transform: translateX(100%);
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     button.submit-btn:hover { 
-      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6); 
+      box-shadow: 0 15px 40px rgba(76, 175, 80, 0.6); 
       transform: translateY(-4px) scale(1.02);
+      background: #43a047;
     }
 
     button.submit-btn:active {
       transform: translateY(-2px) scale(0.98);
     }
-
-    .success-message {
-      margin-top: 25px;
-      background: linear-gradient(135deg, #56cc9d 0%, #6cc04a 100%);
-      color: white;
-      padding: 0;
-      border-radius: 18px;
-      font-weight: 600;
-      text-align: center;
-      user-select: none;
-      display: none;
-      box-shadow: 0 8px 25px rgba(86, 204, 157, 0.4);
-      animation: successSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-      overflow: hidden;
-      position: relative;
+    
+    .info-message {
+        display: none;
+        background: #e8f5e9;
+        border: 1px solid #4caf50;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1rem;
+        color: #2e7d32;
+        line-height: 1.5;
+        animation: fadeIn 0.5s ease-in-out;
     }
-
-    .success-message::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-      transform: translateX(-100%);
-      animation: successShimmer 2s ease-in-out infinite;
-    }
-
-    @keyframes successShimmer {
-      0% { transform: translateX(-100%); }
-      50% { transform: translateX(100%); }
-      100% { transform: translateX(100%); }
-    }
-
-    .success-message img {
-      margin: 15px 0 15px 0;
-      width: 200px;
-      max-width: 90%;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease;
-    }
-
-    .success-message img:hover {
-      transform: scale(1.05);
-    }
-
-    .success-message .payment-info {
-      text-align: center;
-      font-size: 1.1em;
-      color: #fff;
-      background: rgba(79,172,254,0.9);
-      border-radius: 10px;
-      padding: 12px 18px;
-      margin-bottom: 8px;
-      font-weight: 500;
-      backdrop-filter: blur(10px);
-    }
-
-    .success-message .payment-info b {
-      color: #fcd13a;
-      font-weight: 700;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    }
-
-    .success-message .payment-info1 {
-      color: #ffef9f;
-      display: block;
-      margin-top: 10px;
-      font-weight: 500;
-      line-height: 1.4;
-    }
-
-    @keyframes successSlideIn {
-      0% { 
-        opacity: 0; 
-        transform: translateY(-30px) scale(0.9);
-      }
-      100% { 
-        opacity: 1; 
-        transform: translateY(0) scale(1);
-      }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     /* Enhanced mobile responsiveness */
@@ -457,66 +311,72 @@
         font-size: 1.1rem;
       }
     }
-
-    /* Loading animation for form submission */
-    .loading {
-      position: relative;
+    
+    /* Loading Progress Bar */
+    .submit-btn .content {
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+    
+    .submit-btn.loading .content {
+      opacity: 0;
       pointer-events: none;
     }
 
-    .loading::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 20px;
-      height: 20px;
-      margin: -10px 0 0 -10px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-top: 2px solid white;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    .progress-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        padding: 0 20px;
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .submit-btn.loading .progress-container {
+        opacity: 1;
+    }
+    
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
     }
 
-    /* Enhanced focus indicators */
-    input:focus, select:focus, textarea:focus {
-      position: relative;
+    .progress-fill {
+        height: 100%;
+        background: #2e7d32;
+        width: 0%;
+        transition: width 0.1s linear;
+        border-radius: 10px;
     }
 
-    /* Custom scrollbar for select multiple */
-    select[multiple]::-webkit-scrollbar {
-      width: 8px;
+    .progress-text {
+        color: #000000;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-left: 15px;
+        width: 40px;
+        text-align: right;
     }
 
-    select[multiple]::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 4px;
-    }
-
-    select[multiple]::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 4px;
-    }
-
-    select[multiple]::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(135deg, #5a6fd8, #6a4190);
-    }
   </style>
 </head>
 <body>
   <div class="container" role="main" aria-labelledby="formTitle">
     <div class="header">
       <div class="logo-title">
-        <a href="https://imgbb.com/" target="_blank" rel="noopener noreferrer">
-          <img class="logo" src="images/quiz_logo.jpg" alt="quiz logo" border="0" />
-        </a>
+              <img class="logo" src="images/quiz_logo.jpg" alt="quiz logo" border="0" />
+        
         <h1 id="formTitle">
-          <span class="quiz-icon">🏆</span>
+          <span class="quiz-icon"><i class="fas fa-trophy"></i></span>
           क्विज प्रतियोगिता- 2026
         </h1>
       </div>
@@ -525,17 +385,17 @@
     <form id="quizForm" novalidate>
       <div class="form-group">
         <label for="firstName">First Name *</label>
-        <input type="text" id="firstName" name="firstName" required autocomplete="given-name" placeholder="अपना पहला नाम दर्ज करें" />
+        <input type="text" id="firstName" name="firstName" required autocomplete="given-name" placeholder="अपना पहला नाम दर्ज करें" pattern="[A-Za-z\s]+" title="केवल अक्षर ही मान्य हैं।" />
       </div>
 
       <div class="form-group">
         <label for="lastName">Last Name *</label>
-        <input type="text" id="lastName" name="lastName" required autocomplete="family-name" placeholder="अपना अंतिम नाम दर्ज करें" />
+        <input type="text" id="lastName" name="lastName" required autocomplete="family-name" placeholder="अपना अंतिम नाम दर्ज करें" pattern="[A-Za-z\s]+" title="केवल अक्षर ही मान्य हैं।" />
       </div>
 
       <div class="form-group">
         <label for="fatherName">Father's Name *</label>
-        <input type="text" id="fatherName" name="fatherName" required placeholder="अपने पिता का नाम दर्ज करें" />
+        <input type="text" id="fatherName" name="fatherName" required placeholder="अपने पिता का नाम दर्ज करें" pattern="[A-Za-z\s]+" title="केवल अक्षर ही मान्य हैं।" />
       </div>
 
       <div class="form-group">
@@ -555,12 +415,12 @@
 
       <div class="form-group">
         <label for="organization">School/College/Organization *</label>
-        <input type="text" id="organization" name="organization" required placeholder="आपके स्कूल/कॉलेज का नाम" />
+        <input type="text" id="organization" name="organization" required placeholder="आपके स्कूल/कॉलेज का नाम" pattern="[A-Za-z0-9\s.,-]+" title="केवल अक्षर, नंबर, और कुछ विशेष वर्ण (.,-) मान्य हैं।" />
       </div>
 
       <div class="form-group">
         <label for="address">Address *</label>
-        <input type="text" id="address" name="address" required placeholder="आपका पूरा पता" />
+        <input type="text" id="address" name="address" required placeholder="आपका पूरा पता" pattern="[A-Za-z0-9\s.,-]+" title="केवल अक्षर, नंबर, और कुछ विशेष वर्ण (.,-) मान्य हैं।" />
       </div>
 
       <div class="form-group">
@@ -576,14 +436,7 @@
         <label for="class">Class *</label>
         <select id="class" name="class" required>
           <option value="">Select Class</option>
-          <option value="5">Class 5</option>
-          <option value="6">Class 6</option>
-          <option value="7">Class 7</option>
-          <option value="8">Class 8</option>
-          <option value="9">Class 9</option>
-          <option value="10">Class 10</option>
-          <option value="11">Class 11</option>
-          <option value="12">Class 12</option>
+          <!-- Options will be dynamically added here -->
         </select>
       </div>
 
@@ -615,153 +468,185 @@
       </div>
 
       <button type="submit" class="submit-btn" aria-label="Register for Quiz Competition">
-        🚀 Register for Quiz Competition 🚀
+        <span class="content"><i class="fas fa-paper-plane"></i> Register Now</span>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0%</div>
+        </div>
       </button>
 
-      <div class="success-message" id="successMessage" role="alert" aria-live="assertive">
-        <div style="display: flex; flex-direction: column; align-items: center;">
-          
-          <div class="payment-info">
-            🎉 Registration Successful!<br>Check your email for confirmation details.
-            <span class="payment-info1">
-              You can make payment online.<br>
-              <span style="color:#fff;font-weight:500;">
-                And if you make online payment, make sure to share payment details on WhatsApp no. <b>+91 9263613438</b>
-              </span>
-            </span>    
-          </div>
-          <div style="text-align: center; margin: 20px 0;">
-            <a href="https://razorpay.me/@yuvachetnasamitijalwar" 
-               target="_blank" 
-               style="display: inline-block; 
-                      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-                      color: white; 
-                      padding: 12px 30px; 
-                      border-radius: 12px; 
-                      text-decoration: none; 
-                      font-weight: 600; 
-                      font-size: 16px; 
-                      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
-                      transition: all 0.3s ease;
-                      border: none;"
-               onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(59, 130, 246, 0.4)';"
-               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(59, 130, 246, 0.3)';">
-              💳 Pay Online with Razorpay 💳
-            </a>
-          </div>
-          
-          <div style="margin-top:18px;font-size:1.15em;color:#251abf;font-weight:600;">
-            😊 आप जैसे प्रतिभावान छात्र को हमारी शुभकामनाएँ! आगे बढ़िए और अपनी काबिलियत दिखाइए! 🚀
-             <span style="color:#251abf;font-weight:600;;">— युवा चेतना समिति की ओर से ढेरों शुभकामनाएँ! 🎊</span>
-          </div>
-        </div>
-      </div>
+      <div class="info-message" id="alertMessage"></div>
+
     </form>
   </div>
   <script>
-    document.getElementById('quizForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
+    document.addEventListener('DOMContentLoaded', () => {
+      const categorySelect = document.getElementById('category');
+      const classSelect = document.getElementById('class');
+      const quizForm = document.getElementById('quizForm');
+      const alertMessage = document.getElementById('alertMessage');
+      const submitBtn = document.querySelector('.submit-btn');
+      const progressFill = document.getElementById('progressFill');
+      const progressText = document.getElementById('progressText');
 
-      // Add loading state
-      const submitBtn = this.querySelector('.submit-btn');
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = 'Processing...';
-      submitBtn.classList.add('loading');
-
-      const firstName = document.getElementById('firstName').value.trim();
-      const lastName = document.getElementById('lastName').value.trim();
-      const fatherName = document.getElementById('fatherName').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const age = parseInt(document.getElementById('age').value);
-      const organization = document.getElementById('organization').value.trim();
-      const address = document.getElementById('address').value.trim();
-      const category = document.getElementById('category').value;
-      const studentClass = document.getElementById('class').value;
-
-      let subjects = [];
-      const subjectsSelect = document.getElementById('subjects');
-      for (let option of subjectsSelect.options) {
-        if (option.selected) subjects.push(option.value);
-      }
-
-      const experience = document.getElementById('experience').value || '';
-      const termsAgreed = document.getElementById('terms').checked;
-      const subscribedNewsletter = document.getElementById('newsletter').checked;
-
-      if (!termsAgreed) {
-        alert('Please agree to the terms and conditions and privacy policy to register.');
-        submitBtn.innerHTML = originalText;
-        submitBtn.classList.remove('loading');
-        return;
-      }
-
-      const data = {
-        name: firstName + ' ' + lastName,
-        fatherName,
-        email,
-        phone,
-        age,
-        organization,
-        address,
-        category,
-        class: studentClass,
-        subjects,
-        experience,
-        termsAgreed,
-        subscribedNewsletter
+      // Function to dynamically update class options based on category
+      const updateClassOptions = (category) => {
+        classSelect.innerHTML = '<option value="">Select Class</option>';
+        let classes;
+        if (category === 'class5to8') {
+          classes = [5, 6, 7, 8];
+        } else if (category === 'class9to12') {
+          classes = [9, 10, 11, 12];
+        } else {
+          classes = [];
+        }
+        classes.forEach(cls => {
+          const option = document.createElement('option');
+          option.value = cls;
+          option.textContent = `Class ${cls}`;
+          classSelect.appendChild(option);
+        });
       };
 
-      try {
-        const response = await fetch('https://quiz-backend-nhyn.onrender.com/api/quiz/register', {
+      // Event listener for category change
+      categorySelect.addEventListener('change', (e) => {
+        updateClassOptions(e.target.value);
+      });
 
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
+      // Form submission logic
+      quizForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
 
-        const result = await response.json();
+        // Validate all form fields
+        const allFieldsValid = quizForm.checkValidity();
+        const termsAgreed = document.getElementById('terms').checked;
 
-        if (response.ok) {
-         // New tab में success.html open करने के लिए
-          window.open('success.html', '_blank');
+        if (!allFieldsValid || !termsAgreed) {
+          alertMessage.style.display = 'block';
+          alertMessage.style.background = '#e8f5e9';
+          alertMessage.style.color = '#2e7d32';
 
-          // Form reset करने के लिए (optional)
-          this.reset();
-
-        // Confirmation message (optional)
-        alert('Registration successful! Check the new tab for payment details.');
-
-        } else {
-          alert('Registration failed: ' + (result.error || 'Unknown error'));
+          // Custom error messages for specific fields
+          const firstName = document.getElementById('firstName');
+          const lastName = document.getElementById('lastName');
+          const fatherName = document.getElementById('fatherName');
+          const organization = document.getElementById('organization');
+          const address = document.getElementById('address');
+          
+          if (!termsAgreed) {
+              alertMessage.innerHTML = 'कृपया पंजीकरण के लिए नियम और शर्तों से सहमत हों।';
+          } else if (!firstName.checkValidity()) {
+              alertMessage.innerHTML = firstName.title;
+          } else if (!lastName.checkValidity()) {
+              alertMessage.innerHTML = lastName.title;
+          } else if (!fatherName.checkValidity()) {
+              alertMessage.innerHTML = fatherName.title;
+          } else if (!organization.checkValidity()) {
+              alertMessage.innerHTML = organization.title;
+          } else if (!address.checkValidity()) {
+              alertMessage.innerHTML = address.title;
+          } else {
+              alertMessage.innerHTML = 'कृपया सभी आवश्यक फ़ील्ड्स को सही ढंग से भरें।';
+          }
+          return;
         }
-      } catch (error) {
-        alert('Network/server error: ' + error.message);
-      } finally {
-        // Remove loading state
-        submitBtn.innerHTML = originalText;
-        submitBtn.classList.remove('loading');
-      }
-    });
 
-    // Add real-time validation feedback
-    const inputs = document.querySelectorAll('input[required], select[required]');
-    inputs.forEach(input => {
-      input.addEventListener('blur', function() {
-        if (this.checkValidity()) {
-          this.style.borderColor = '#28a745';
-          this.style.backgroundColor = '#f8fff9';
-        } else {
-          this.style.borderColor = '#dc3545';
-          this.style.backgroundColor = '#fff5f5';
+        // Additional validation for class selection based on category
+        const selectedCategory = categorySelect.value;
+        const selectedClass = parseInt(classSelect.value);
+        let isValidClass = false;
+
+        if (selectedCategory === 'class5to8' && selectedClass >= 5 && selectedClass <= 8) {
+          isValidClass = true;
+        } else if (selectedCategory === 'class9to12' && selectedClass >= 9 && selectedClass <= 12) {
+          isValidClass = true;
+        }
+
+        if (classSelect.value === "" || !isValidClass) {
+          alertMessage.style.display = 'block';
+          alertMessage.style.background = '#e8f5e9';
+          alertMessage.style.color = '#2e7d32';
+          alertMessage.innerHTML = 'कृपया सही कैटेगरी के अनुसार क्लास चुनें।';
+          return;
+        }
+
+        alertMessage.style.display = 'none';
+        submitBtn.classList.add('loading');
+
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+            if (progress < 90) {
+                progress += 5;
+                progressFill.style.width = `${progress}%`;
+                progressText.innerText = `${progress}%`;
+            }
+        }, 100);
+
+        const data = {
+          name: document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim(),
+          fatherName: document.getElementById('fatherName').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          age: parseInt(document.getElementById('age').value),
+          organization: document.getElementById('organization').value.trim(),
+          address: document.getElementById('address').value.trim(),
+          category: selectedCategory,
+          class: selectedClass,
+          subjects: Array.from(document.getElementById('subjects').options).filter(opt => opt.selected).map(opt => opt.value),
+          experience: document.getElementById('experience').value || '',
+          termsAgreed,
+          subscribedNewsletter: document.getElementById('newsletter').checked
+        };
+
+        try {
+          const response = await fetch('https://quiz-backend-nhyn.onrender.com/api/quiz/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            progress = 100;
+            progressFill.style.width = '100%';
+            progressText.innerText = '100%';
+            clearInterval(progressInterval);
+            setTimeout(() => {
+                window.open('success.html', '_blank');
+                quizForm.reset();
+            }, 500);
+          } else {
+            alertMessage.style.display = 'block';
+            alertMessage.style.background = '#e8f5e9';
+            alertMessage.style.color = '#2e7d32';
+            alertMessage.innerHTML = 'पंजीकरण विफल रहा: ' + (result.error || 'अज्ञात त्रुटि');
+          }
+        } catch (error) {
+          alertMessage.style.display = 'block';
+          alertMessage.style.background = '#e8f5e9';
+          alertMessage.style.color = '#2e7d32';
+          alertMessage.innerHTML = 'नेटवर्क/सर्वर त्रुटि: ' + error.message;
+        } finally {
+          clearInterval(progressInterval);
+          submitBtn.classList.remove('loading');
+          progressFill.style.width = '0%';
+          progressText.innerText = '0%';
         }
       });
 
-      input.addEventListener('input', function() {
-        if (this.style.borderColor === '#dc3545' && this.checkValidity()) {
-          this.style.borderColor = '#28a745';
-          this.style.backgroundColor = '#f8fff9';
-        }
+      // Real-time validation feedback
+      const inputs = document.querySelectorAll('input, select, textarea');
+      inputs.forEach(input => {
+        input.addEventListener('input', function() {
+          if (this.checkValidity()) {
+            this.style.borderColor = '#2e7d32';
+          } else {
+            this.style.borderColor = '#0d47a1';
+          }
+        });
       });
     });
   </script>
