@@ -11,11 +11,20 @@
       margin: 0; 
       padding: 0; 
       box-sizing: border-box; 
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     }
 
+    /* --- Color Palette (New: Teal & Coral) ---
+    Primary Accent (Dark Teal): #00796b
+    Secondary Accent (Coral Orange): #ff7043
+    Background: Light Cyan Gradient
+    Error Color: #d32f2f (Deep Red)
+    Success (Valid Field): #004d40 (Darker Teal)
+    */
+
     body {
-      background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); /* Calm blue gradient background */
+      /* UPDATED: Slightly deeper and more saturated blue gradient */
+      background: linear-gradient(135deg, #d3efff 0%, #a8e3ff 100%); 
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -35,15 +44,16 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px),
-                  radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background: radial-gradient(circle, rgba(0, 121, 107, 0.1) 1px, transparent 1px),
+                  radial-gradient(circle, rgba(0, 121, 107, 0.1) 1px, transparent 1px);
       background-size: 40px 40px;
       background-position: 0 0, 20px 20px;
       z-index: 0;
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.95); /* Clean white with transparency */
+      /* UPDATED: A clearer, slightly more saturated light blue tint */
+      background: #E8F6FF; 
       border-radius: 25px;
       box-shadow: 0 40px 80px rgba(0,0,0,0.2), 
                   0 0 0 1px rgba(0,0,0,0.1);
@@ -73,12 +83,19 @@
     }
 
     .header div.logo-title img.logo {
+      /* Placeholder image details */
       height: 160px;
       width: auto;
       border-radius: 15px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.2);
       transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
+    .header div.logo-title img.logo[src*="placehold"] {
+        height: 160px;
+        width: 160px;
+        object-fit: cover;
+    }
+
 
     .header div.logo-title img.logo:hover {
       transform: scale(1.05) rotate(2deg);
@@ -87,20 +104,20 @@
 
     .header h1 {
       font-size: 2.9rem; 
-      color: #0d47a1; /* Dark blue for title */
+      color: #00796b; /* Dark Teal for title */
       letter-spacing: 2px; 
       display: flex; 
       align-items: center; 
       gap: 12px;
       font-weight: 700;
-      text-shadow: 0 0 8px rgba(13, 71, 161, 0.3); 
+      text-shadow: 0 0 8px rgba(0, 121, 107, 0.3); 
       flex-wrap: wrap;
       justify-content: center;
     }
 
     .quiz-icon { 
       font-size: 3rem; 
-      color: #0d47a1; /* Dark blue for icon */
+      color: #00796b; /* Dark Teal for icon */
     }
 
     .header p { 
@@ -133,7 +150,7 @@
     }
 
     .form-group:focus-within label {
-      color: #0d47a1; /* Dark blue on focus */
+      color: #00796b; /* Dark Teal on focus */
     }
 
     input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select, textarea {
@@ -149,21 +166,33 @@
 
     input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="number"]:focus,
     select:focus, textarea:focus {
-      border-color: #0d47a1; /* Dark blue border on focus */
+      border-color: #00796b; /* Dark Teal border on focus */
       background: #ffffff;
       outline: none;
-      box-shadow: 0 0 0 4px rgba(13, 71, 161, 0.2),
-                  0 8px 25px rgba(13, 71, 161, 0.1);
+      box-shadow: 0 0 0 4px rgba(0, 121, 107, 0.2), /* Dark Teal shadow */
+                  0 8px 25px rgba(0, 121, 107, 0.1);
       transform: translateY(-3px) scale(1.01);
     }
+    
+    /* VALIDATION STYLES */
 
-    input[type="text"]:valid:not(:placeholder-shown), 
-    input[type="email"]:valid:not(:placeholder-shown), 
-    input[type="tel"]:valid:not(:placeholder-shown), 
-    input[type="number"]:valid:not(:placeholder-shown) {
-      border-color: #2e7d32; /* Dark green for valid input */
-      box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.2);
+    /* Style for fields that pass client-side validation (Darker Teal) */
+    input[type="text"]:valid:not(:placeholder-shown):not(:focus), 
+    input[type="email"]:valid:not(:placeholder-shown):not(:focus), 
+    input[type="tel"]:valid:not(:placeholder-shown):not(:focus), 
+    input[type="number"]:valid:not(:placeholder-shown):not(:focus) {
+      border-color: #004d40 !important; /* Darker Teal for valid input */
+      box-shadow: 0 0 0 4px rgba(0, 77, 64, 0.2) !important;
     }
+    
+    /* Style for fields that fail client-side validation (Deep Red) */
+    input:invalid:not(:placeholder-shown),
+    select:invalid:not([value=""]):not(:focus) {
+        border-color: #d32f2f !important; /* Deep Red for invalid input */
+        box-shadow: 0 0 0 4px rgba(211, 47, 47, 0.2) !important;
+    }
+    /* End of Validation Styles */
+
 
     select[multiple] { 
       height: 120px; 
@@ -177,7 +206,7 @@
     }
     
     select option:checked {
-      background: #2e7d32;
+      background: #004d40; /* Darker Teal for selected option */
       color: white;
     }
     
@@ -199,13 +228,13 @@
     }
 
     .checkbox-group:hover {
-      background-color: rgba(13, 71, 161, 0.05);
+      background-color: rgba(0, 121, 107, 0.05); /* Light teal hover */
     }
 
     .checkbox-group input[type="checkbox"] {
       width: 22px; 
       height: 22px; 
-      accent-color: #0d47a1; /* Dark blue accent */
+      accent-color: #00796b; /* Dark Teal accent */
       cursor: pointer; 
       flex-shrink: 0; 
       transition: all 0.3s ease;
@@ -215,7 +244,7 @@
 
     .checkbox-group input[type="checkbox"]:hover { 
       transform: scale(1.15);
-      box-shadow: 0 0 10px rgba(13, 71, 161, 0.3);
+      box-shadow: 0 0 10px rgba(0, 121, 107, 0.3);
     }
 
     .checkbox-group input[type="checkbox"]:checked {
@@ -239,14 +268,14 @@
       margin-top: 15px;
       padding: 18px;
       width: 100%;
-      background: #4caf50; /* Green button */
+      background: #ff7043; /* Coral Orange button */
       color: #fff; 
       border: none;
       border-radius: 18px;
       font-weight: 700;
       font-size: 1.2rem;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+      box-shadow: 0 10px 30px rgba(255, 112, 67, 0.4);
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       user-select: none;
       position: relative;
@@ -256,29 +285,34 @@
     }
 
     button.submit-btn:hover { 
-      box-shadow: 0 15px 40px rgba(76, 175, 80, 0.6); 
+      box-shadow: 0 15px 40px rgba(255, 112, 67, 0.6); 
       transform: translateY(-4px) scale(1.02);
-      background: #43a047;
+      background: #f4511e; /* Slightly deeper orange on hover */
     }
 
     button.submit-btn:active {
       transform: translateY(-2px) scale(0.98);
     }
     
-    .info-message {
-        display: none;
-        background: #e8f5e9;
-        border: 1px solid #4caf50;
+    /* Error Message Styling (Deep Red) */
+    .info-message.error {
+        display: block;
+        background: #ffebee; /* Light red background */
+        border: 1px solid #d32f2f; /* Deep red border */
         border-radius: 12px;
         padding: 20px;
         text-align: center;
         margin-top: 20px;
         font-size: 1rem;
-        color: #2e7d32;
+        color: #d32f2f; /* Deep red text */
         line-height: 1.5;
         animation: fadeIn 0.5s ease-in-out;
     }
     
+    .info-message {
+      display: none; /* Hide by default */
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -351,8 +385,8 @@
     }
 
     .progress-fill {
+        background: #ff7043; /* Coral Orange progress fill */
         height: 100%;
-        background: #2e7d32;
         width: 0%;
         transition: width 0.1s linear;
         border-radius: 10px;
@@ -373,8 +407,10 @@
   <div class="container" role="main" aria-labelledby="formTitle">
     <div class="header">
       <div class="logo-title">
-              <img class="logo" src="images/quiz_logo.jpg" alt="quiz logo" border="0" />
-        
+        <img class="logo" 
+             src="images/quiz_logo.jpg" 
+             onerror="this.onerror=null; this.src='https://placehold.co/160x160/00796b/ffffff?text=Quiz+Logo';"
+             alt="quiz logo" border="0" />
         <h1 id="formTitle">
           <span class="quiz-icon"><i class="fas fa-trophy"></i></span>
           क्विज प्रतियोगिता- 2026
@@ -400,17 +436,17 @@
 
       <div class="form-group">
         <label for="email">Email Address *</label>
-        <input type="email" id="email" name="email" required autocomplete="email" placeholder="example@email.com" />
+        <input type="email" id="email" name="email" required autocomplete="email" placeholder="example@email.com" title="कृपया एक वैध ईमेल पता दर्ज करें।" />
       </div>
 
       <div class="form-group">
         <label for="phone">Phone Number *</label>
-        <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+91 12345 67890" />
+        <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+91 12345 67890" pattern="^\+?[0-9\s-]{10,15}$" title="कृपया 10 अंकों वाला फ़ोन नंबर दर्ज करें।" />
       </div>
 
       <div class="form-group">
         <label for="age">Age *</label>
-        <input type="number" id="age" name="age" min="13" max="100" required placeholder="आपकी उम्र" />
+        <input type="number" id="age" name="age" min="13" max="100" required placeholder="आपकी उम्र" title="उम्र 13 से 100 के बीच होनी चाहिए।" />
       </div>
 
       <div class="form-group">
@@ -482,11 +518,38 @@
     </form>
   </div>
   <script>
+    // Utility function to set error state
+    function setError(message, fieldId = null) {
+      const alertMessage = document.getElementById('alertMessage');
+      alertMessage.style.display = 'block';
+      alertMessage.classList.add('error');
+      alertMessage.innerHTML = message;
+      
+      // Highlight the specific field in error
+      if (fieldId) {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            field.focus(); // Focus on the first error field
+            // Note: CSS handles the red border based on the :invalid selector
+        }
+      }
+    }
+
+    // Utility function to clear error state
+    function clearError() {
+      const alertMessage = document.getElementById('alertMessage');
+      alertMessage.style.display = 'none';
+      alertMessage.classList.remove('error');
+      // Clear red border from all fields, though CSS should primarily manage this
+      document.querySelectorAll('input:invalid, select:invalid').forEach(el => {
+          el.style.borderColor = ''; // Revert to default or CSS rules
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       const categorySelect = document.getElementById('category');
       const classSelect = document.getElementById('class');
       const quizForm = document.getElementById('quizForm');
-      const alertMessage = document.getElementById('alertMessage');
       const submitBtn = document.querySelector('.submit-btn');
       const progressFill = document.getElementById('progressFill');
       const progressText = document.getElementById('progressText');
@@ -513,43 +576,47 @@
       // Event listener for category change
       categorySelect.addEventListener('change', (e) => {
         updateClassOptions(e.target.value);
+        // Clear class selection if category changes
+        classSelect.value = "";
       });
+      
+      // Function to find the first invalid element
+      function findFirstInvalidElement(form) {
+        const elements = form.querySelectorAll('input, select, textarea');
+        for (const el of elements) {
+          if (!el.checkValidity() && el.required) {
+            return el;
+          }
+        }
+        return null;
+      }
+
 
       // Form submission logic
       quizForm.addEventListener('submit', async function (e) {
         e.preventDefault();
+        clearError(); // Clear previous errors
 
-        // Validate all form fields
-        const allFieldsValid = quizForm.checkValidity();
-        const termsAgreed = document.getElementById('terms').checked;
+        // Find the first invalid element
+        const firstInvalid = findFirstInvalidElement(quizForm);
 
-        if (!allFieldsValid || !termsAgreed) {
-          alertMessage.style.display = 'block';
-          alertMessage.style.background = '#e8f5e9';
-          alertMessage.style.color = '#2e7d32';
-
-          // Custom error messages for specific fields
-          const firstName = document.getElementById('firstName');
-          const lastName = document.getElementById('lastName');
-          const fatherName = document.getElementById('fatherName');
-          const organization = document.getElementById('organization');
-          const address = document.getElementById('address');
+        if (firstInvalid) {
+          // Determine the most specific error message
+          let errorMessage = 'कृपया सभी आवश्यक फ़ील्ड्स को सही ढंग से भरें।';
           
-          if (!termsAgreed) {
-              alertMessage.innerHTML = 'कृपया पंजीकरण के लिए नियम और शर्तों से सहमत हों।';
-          } else if (!firstName.checkValidity()) {
-              alertMessage.innerHTML = firstName.title;
-          } else if (!lastName.checkValidity()) {
-              alertMessage.innerHTML = lastName.title;
-          } else if (!fatherName.checkValidity()) {
-              alertMessage.innerHTML = fatherName.title;
-          } else if (!organization.checkValidity()) {
-              alertMessage.innerHTML = organization.title;
-          } else if (!address.checkValidity()) {
-              alertMessage.innerHTML = address.title;
-          } else {
-              alertMessage.innerHTML = 'कृपया सभी आवश्यक फ़ील्ड्स को सही ढंग से भरें।';
+          if (firstInvalid.type === 'checkbox' && firstInvalid.id === 'terms' && !firstInvalid.checked) {
+              errorMessage = 'कृपया पंजीकरण के लिए नियम और शर्तों से सहमत हों।';
+          } else if (firstInvalid.id === 'age') {
+              errorMessage = firstInvalid.title;
+          } else if (firstInvalid.type === 'email' || firstInvalid.type === 'tel') {
+              errorMessage = firstInvalid.title;
+          } else if (firstInvalid.validity.patternMismatch) {
+              errorMessage = firstInvalid.title || 'कृपया इस फ़ील्ड के लिए केवल वैध वर्ण (Valid Characters) दर्ज करें।';
+          } else if (firstInvalid.validity.valueMissing) {
+              errorMessage = 'यह फ़ील्ड आवश्यक है। कृपया इसे भरें।';
           }
+
+          setError(errorMessage, firstInvalid.id);
           return;
         }
 
@@ -558,31 +625,32 @@
         const selectedClass = parseInt(classSelect.value);
         let isValidClass = false;
 
-        if (selectedCategory === 'class5to8' && selectedClass >= 5 && selectedClass <= 8) {
-          isValidClass = true;
-        } else if (selectedCategory === 'class9to12' && selectedClass >= 9 && selectedClass <= 12) {
-          isValidClass = true;
+        if (selectedCategory && selectedClass) {
+             if (selectedCategory === 'class5to8' && selectedClass >= 5 && selectedClass <= 8) {
+              isValidClass = true;
+            } else if (selectedCategory === 'class9to12' && selectedClass >= 9 && selectedClass <= 12) {
+              isValidClass = true;
+            }
         }
 
+
         if (classSelect.value === "" || !isValidClass) {
-          alertMessage.style.display = 'block';
-          alertMessage.style.background = '#e8f5e9';
-          alertMessage.style.color = '#2e7d32';
-          alertMessage.innerHTML = 'कृपया सही कैटेगरी के अनुसार क्लास चुनें।';
+          setError('कृपया सही कैटेगरी के अनुसार क्लास चुनें।', 'class');
           return;
         }
 
-        alertMessage.style.display = 'none';
+        // Proceed with submission process
         submitBtn.classList.add('loading');
 
         let progress = 0;
+        // Progress bar is slightly slower now: interval 150ms, increment 3
         const progressInterval = setInterval(() => {
             if (progress < 90) {
-                progress += 5;
+                progress += 3;
                 progressFill.style.width = `${progress}%`;
                 progressText.innerText = `${progress}%`;
             }
-        }, 100);
+        }, 150);
 
         const data = {
           name: document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim(),
@@ -596,7 +664,7 @@
           class: selectedClass,
           subjects: Array.from(document.getElementById('subjects').options).filter(opt => opt.selected).map(opt => opt.value),
           experience: document.getElementById('experience').value || '',
-          termsAgreed,
+          termsAgreed: document.getElementById('terms').checked,
           subscribedNewsletter: document.getElementById('newsletter').checked
         };
 
@@ -615,20 +683,15 @@
             progressText.innerText = '100%';
             clearInterval(progressInterval);
             setTimeout(() => {
+                // Success action
                 window.open('success.html', '_blank');
                 quizForm.reset();
             }, 500);
           } else {
-            alertMessage.style.display = 'block';
-            alertMessage.style.background = '#e8f5e9';
-            alertMessage.style.color = '#2e7d32';
-            alertMessage.innerHTML = 'पंजीकरण विफल रहा: ' + (result.error || 'अज्ञात त्रुटि');
+            setError('पंजीकरण विफल रहा: ' + (result.error || 'अज्ञात त्रुटि'));
           }
         } catch (error) {
-          alertMessage.style.display = 'block';
-          alertMessage.style.background = '#e8f5e9';
-          alertMessage.style.color = '#2e7d32';
-          alertMessage.innerHTML = 'नेटवर्क/सर्वर त्रुटि: ' + error.message;
+          setError('नेटवर्क/सर्वर त्रुटि: ' + error.message);
         } finally {
           clearInterval(progressInterval);
           submitBtn.classList.remove('loading');
@@ -636,16 +699,32 @@
           progressText.innerText = '0%';
         }
       });
-
-      // Real-time validation feedback
+      
+      // Clear error message when user starts typing again
       const inputs = document.querySelectorAll('input, select, textarea');
       inputs.forEach(input => {
         input.addEventListener('input', function() {
-          if (this.checkValidity()) {
-            this.style.borderColor = '#2e7d32';
-          } else {
-            this.style.borderColor = '#0d47a1';
-          }
+           clearError();
+           // Optional: clear red border if valid, though CSS handles it
+           if (this.checkValidity()) {
+               this.style.borderColor = '#004d40'; /* Darker Teal for valid */
+           } else {
+               this.style.borderColor = '#d32f2f'; /* Red border for invalid */
+           }
+        });
+        
+        // Ensure that blur events also check validity and apply immediate feedback
+        input.addEventListener('blur', function() {
+            if (this.checkValidity()) {
+                // This ensures green border remains after unfocusing a valid field
+                this.style.borderColor = '#004d40';
+            } else if (this.value) {
+                // This ensures red border remains after unfocusing an invalid field
+                this.style.borderColor = '#d32f2f';
+            } else {
+                // Revert to default border if empty and unfocused
+                this.style.borderColor = '#ced4da';
+            }
         });
       });
     });
