@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>प्रिंट करने योग्य एडमिट कार्ड</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font awesome for print icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* Custom font import for better Hindi/English display */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans+Devanagari:wght@100..900&display=swap');
+        body {
+            font-family: 'Noto Sans Devangari', 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Outer background */
+            /* Reduced body padding for maximum space */
+            padding: 0.5rem; 
+        }
+        
+        /* Tailwind configuration for the chosen colors */
+        :root {
+            --primary-blue: #1e3a8a; /* Deep Blue - New Main Color */
+            --accent-teal: #0d9488;
+            --accent-orange: #f97316;
+            --card-bg: #f5f3ff; /* Light Lavender Background for more color */
+        }
+
+        /* Style for editable fields to give a subtle focus effect */
+        [contenteditable="true"]:focus {
+            outline: 2px solid var(--accent-teal); /* Teal ring on focus */
+            outline-offset: 2px;
+            background-color: #e0f2f1; /* Light teal background on focus */
+            cursor: text;
+        }
+        
+        /* ------------------------------------- */
+        /* Custom styles for printing (CRITICAL) */
+        /* ------------------------------------- */
+        @media print {
+            /* 1. Page layout optimization for A4/Letter size */
+            @page {
+                size: A4; /* Or Letter */
+                margin: 0.5cm; /* Minimal margins */
+            }
+            body {
+                background: none; /* Remove background for print */
+                padding: 0;
+                margin: 0;
+            }
+
+            /* 2. Hide control elements */
+            .no-print {
+                display: none !important;
+            }
+
+            /* 3. Card container styling for print */
+            .admit-card-container {
+                box-shadow: none !important;
+                border: 2px solid #374151 !important; /* Dark border for clarity */
+                border-radius: 0 !important; /* Remove rounded corners for clean cut */
+                margin: 0 auto;
+                width: 100%;
+                max-width: 21cm; /* A4 width limit */
+            }
+
+            /* FIX: Enforce white text color in the dark header */
+            .print-bg-header * {
+                color: #fff !important; /* Forces all elements inside header to be white */
+            }
+            
+            /* Enforce background colors for printing */
+            .print-bg-header {
+                background-color: var(--primary-blue) !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            .print-bg-main {
+                background-color: var(--card-bg) !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            .bg-accent-orange {
+                 background-color: var(--accent-orange) !important;
+                 -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            /* Ensure the Important Details box retains background in print */
+            .important-details-box {
+                background-color: #fff !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+        }
+    </style>
+    <script>
+        // Tailwind config for custom colors (used by print CSS variables as well)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1e3a8a', 
+                        'accent-teal': '#0d9488', 
+                        'accent-orange': '#f97316', 
+                        'card-bg': '#f5f3ff', 
+                    }
+                }
+            }
+        }
+
+        // Function to handle printing
+        function printAdmitCard() {
+            // This function is often blocked by security settings in certain environments (like iframes).
+            console.log("Attempting to call window.print(). If the dialog doesn't appear, please use Ctrl+P (or Cmd+P) or right-click to Print.");
+            window.print();
+        }
+    </script>
+</head>
+<body class="p-2 md:p-4">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Print Button and Instructions (Hidden when printing) -->
+        <div class="mb-4 no-print flex flex-col sm:flex-row justify-between items-center bg-white p-3 rounded-xl shadow-lg border border-gray-200">
+            <button onclick="printAdmitCard()" class="w-full sm:w-auto px-5 py-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl shadow-md transition duration-150 transform hover:scale-[1.02] active:scale-100 mb-2 sm:mb-0 text-sm">
+                <i class="fas fa-print mr-2"></i> प्रिंट / PDF के रूप में सेव करें
+            </button>
+            <p class="text-xs text-gray-600 mt-2 sm:mt-0 ml-0 sm:ml-4">
+                <i class="fas fa-edit mr-1 text-accent-teal"></i> **संपादन (Edit):** किसी भी टेक्स्ट पर क्लिक करके उसे बदलें।
+            </p>
+        </div>
+
+        <!-- Admit Card Container (Optimized for Single Page Print) -->
+        <div class="admit-card-container bg-card-bg border-4 border-accent-orange rounded-2xl shadow-2xl overflow-hidden relative">
+
+            <!-- Header Section (Dark Blue Background) -->
+            <div class="print-bg-header bg-primary-blue text-white p-3 sm:p-4 flex justify-between items-center shadow-lg">
+                
+                <!-- Logo and Main Title Container (Flex container for alignment) -->
+                <div class="flex items-center space-x-3 sm:space-x-4">
+                    <!-- Logo (BIGGER - 96x96) -->
+                    <img id="logo-img" src="images/quiz_logo.jpg" 
+                        onerror="this.onerror=null;this.src='https://placehold.co/96x96/1e3a8a/ffffff?text=LOGO';"
+                        alt="Logo Placeholder" 
+                        class="w-24 h-24 sm:w-24 sm:h-24 rounded-full border-4 border-white object-cover cursor-pointer"
+                        onclick="alert('कृपया इस इमेज के src को अपने सर्वर से बदलें: quiz-backend/images/quiz_logo.jpg')">
+                    
+                    <!-- Text Block (Bada Text) -->
+                    <div class="flex flex-col items-start">
+                        <h1 class="text-xl sm:text-3xl font-black tracking-wide" contenteditable="true">
+                            युवा चेतना समिति, जलवार
+                        </h1>
+                        <p class="text-base sm:text-lg font-semibold" contenteditable="true">
+                            क्विज़ प्रतियोगिता- 2026
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Admit Card Tag -->
+                <div class="bg-accent-orange px-3 py-1 rounded-full shadow-md self-center hidden sm:block">
+                    <h2 class="text-lg sm:text-xl font-black tracking-widest uppercase" contenteditable="true">
+                        ADMIT CARD
+                    </h2>
+                </div>
+                
+            </div>
+            <!-- Smaller Admit Card Tag for Mobile/Print -->
+            <div class="sm:hidden text-center py-1 bg-accent-orange text-white">
+                 <h2 class="text-lg font-black tracking-widest uppercase" contenteditable="true">
+                    ADMIT CARD
+                </h2>
+            </div>
+            
+            <!-- Main Content Grid (Light Background) -->
+            <div class="print-bg-main p-4 sm:p-6">
+                <!-- Outer Grid for two columns (Details | Important Info + Instructions) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                    
+                    <!-- Column 1: Participant Details (Left Side) -->
+                    <div class="space-y-3 pr-0 lg:pr-5 border-b lg:border-b-0 lg:border-r border-gray-300 pb-3 lg:pb-0">
+                        <h3 class="text-base font-bold text-accent-teal border-b-2 border-accent-orange inline-block pb-1">अभ्यर्थी का विवरण (Participant Details)</h3>
+
+                        <!-- Detail Rows -->
+                        <div class="flex flex-wrap items-center">
+                            <span class="w-full sm:w-1/3 text-sm font-medium text-gray-700">एडमिट कार्ड नं.:-</span>
+                            <span contenteditable="true" class="w-full sm:w-2/3 text-sm font-bold text-primary-blue border-b border-gray-400 p-1 min-h-6">108/0</span>
+                        </div>
+                        
+                        <div class="flex flex-wrap items-center">
+                            <span class="w-full sm:w-1/3 text-sm font-medium text-gray-700">प्रतिभागी का नाम:-</span>
+                            <span contenteditable="true" class="w-full sm:w-2/3 text-base font-extrabold text-accent-teal border-b-2 border-accent-teal p-1 min-h-7">Test user</span>
+                        </div>
+                        
+                        <div class="flex flex-wrap items-center">
+                            <span class="w-full sm:w-1/3 text-sm font-medium text-gray-700">पिता का नाम:-</span>
+                            <span contenteditable="true" class="w-full sm:w-2/3 text-sm font-bold text-primary-blue border-b border-gray-400 p-1 min-h-6">Test father</span>
+                        </div>
+                        
+                        <div class="flex flex-wrap items-center">
+                            <span class="w-full sm:w-1/3 text-sm font-medium text-gray-700">फोन नं.:-</span>
+                            <span contenteditable="true" class="w-full sm:w-2/3 text-sm font-bold text-primary-blue border-b border-gray-400 p-1 min-h-6">+91 1234567890</span>
+                        </div>
+                        
+                        <div class="flex flex-wrap items-center">
+                            <span class="w-full sm:w-1/3 text-sm font-medium text-gray-700">पता:-</span>
+                            <span contenteditable="true" class="w-full sm:w-2/3 text-sm font-bold text-primary-blue border-b border-gray-400 p-1 min-h-6">Jalwar, Rajasthan</span>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Important Details & Instructions (Right Side - 2/3 width on large screen) -->
+                    <div class="space-y-4">
+                        
+                        <!-- Inner Grid for 2:1 ratio (Details | Instructions) -->
+                        <div class="grid grid-cols-2 gap-4">
+
+                            <!-- Important Details (Left of Right Column) -->
+                            <div class="important-details-box bg-white p-3 rounded-xl shadow-md border-t-4 border-accent-orange space-y-2 transition duration-300 hover:shadow-lg">
+                                <h3 class="text-base font-bold text-accent-teal border-b-2 border-gray-200 inline-block pb-1">महत्वपूर्ण विवरण</h3>
+                                
+                                <div class="flex flex-col items-start">
+                                    <span class="text-xs font-semibold text-gray-500">क्विज तिथि (Date):-</span>
+                                    <span contenteditable="true" class="text-sm font-extrabold text-accent-orange border-b border-dashed border-gray-400 p-1 min-h-7">24/01/2026</span>
+                                </div>
+                                <div class="flex flex-col items-start">
+                                    <span class="text-xs font-semibold text-gray-500">क्विज समय (Time):-</span>
+                                    <span contenteditable="true" class="text-sm font-extrabold text-accent-orange border-b border-dashed border-gray-400 p-1 min-h-7">10:00 A.M.</span>
+                                </div>
+                                <div class="flex flex-col items-start">
+                                    <span class="text-xs font-semibold text-gray-500">मोड (Mode):-</span>
+                                    <span contenteditable="true" class="text-sm font-extrabold text-accent-orange border-b border-dashed border-gray-400 p-1 min-h-7">Offline</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Instructions (Right of Right Column) -->
+                            <div class="bg-card-bg p-0">
+                                <h4 class="text-base font-bold text-primary-blue mb-2 border-b-2 border-gray-300 pb-1">निर्देश (Instructions):</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1 pl-2">
+                                    <li class="text-sm" contenteditable="true">एडमिट कार्ड साथ रखना अनिवार्य है।</li>
+                                    <li class="text-sm" contenteditable="true">आपको क्विज़ के लिए अनुमति दी गई है।</li>
+                                    <li class="text-sm font-bold text-accent-teal" contenteditable="true">Entry time:- 09:00 A.M. onwards</li>
+                                </ul>
+                            </div>
+                        </div> <!-- End of Inner Grid -->
+                    </div>
+                </div> <!-- End of Outer Grid -->
+
+                <!-- Footer Section (Issued By & Signature) -->
+                <div class="mt-6 flex flex-col sm:flex-row justify-between items-end pt-3 border-t border-gray-400">
+                    
+                    <!-- Issued By -->
+                    <div class="mb-3 sm:mb-0">
+                        <span class="text-xs font-medium text-gray-600 block">जारीकर्ता (Issued by):-</span>
+                        <span contenteditable="true" class="text-sm font-bold text-primary-blue border-b-2 border-accent-orange p-1 min-h-6">
+                            युवा चेतना समिति, जलवार
+                        </span>
+                    </div>
+
+                    <!-- Signature -->
+                    <div class="text-right">
+                        <div class="border-t-2 border-accent-teal pt-1 w-36">
+                            <span contenteditable="true" class="text-sm font-semibold italic text-gray-800 min-h-6 block">
+                                Hariom Organizer/Convener
+                            </span>
+                        </div>
+                        <span class="text-xs text-gray-600 mt-1 block">हस्ताक्षर (Signature)</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
