@@ -625,3 +625,240 @@ console.log(`
 console.log('Mobile device detected:', isMobile());
 console.log('Screen size:', window.innerWidth + 'x' + window.innerHeight);
 console.log('User agent:', navigator.userAgent);
+
+// Enhanced Helpline Section Functionality
+function initializeHelplineSection() {
+    const helplineSection = document.querySelector('.helpline-section');
+    const helplineItems = document.querySelectorAll('.helpline-item');
+    const featureItems = document.querySelectorAll('.feature-item');
+    
+    // Add enhanced animations on scroll
+    if (helplineSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    helplineSection.style.animation = 'fadeIn 1s ease-out';
+                    
+                    // Staggered animation for helpline items
+                    helplineItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0) scale(1)';
+                            item.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                        }, index * 200);
+                    });
+                    
+                    // Animate feature items
+                    featureItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.animation = `slideInUp 0.6s ease-out ${index * 0.1}s both`;
+                        }, 800 + (index * 100));
+                    });
+                }
+            });
+        }, {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        observer.observe(helplineSection);
+        
+        // Initially hide items for animation
+        helplineItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(50px) scale(0.8)';
+        });
+    }
+    
+    // Enhanced click interactions
+    helplineItems.forEach(item => {
+        const phoneLink = item.querySelector('a[href^="tel:"]');
+        const emailLink = item.querySelector('a[href^="mailto:"]');
+        
+        if (phoneLink) {
+            phoneLink.addEventListener('click', function(e) {
+                // Add ripple effect
+                createHelplineRipple(e, this);
+                
+                // Show confirmation (optional)
+                setTimeout(() => {
+                    if (confirm('क्या आप कॉल करना चाहते हैं?')) {
+                        // Analytics tracking (if needed)
+                        console.log('Helpline call initiated');
+                    } else {
+                        e.preventDefault();
+                    }
+                }, 100);
+            });
+        }
+        
+        if (emailLink) {
+            emailLink.addEventListener('click', function(e) {
+                createHelplineRipple(e, this);
+                console.log('Email support initiated');
+            });
+        }
+    });
+    
+    // Feature items interaction
+    featureItems.forEach((item, index) => {
+        item.addEventListener('click', function() {
+            // Add click animation
+            this.style.transform = 'translateY(-5px) scale(1.1)';
+            setTimeout(() => {
+                this.style.transform = 'translateY(0) scale(1)';
+            }, 150);
+            
+            // Show feature details (optional)
+            const featureTexts = [
+                'हमारी टीम 24/7 आपकी सहायता के लिए तैयार है!',
+                'आपकी सभी जानकारी पूर्णतः सुरक्षित और गोपनीय है।',
+                'हमारे सभी कर्मचारी हिंदी में बात करने में सक्षम हैं।'
+            ];
+            
+            showHelplineTooltip(this, featureTexts[index]);
+        });
+    });
+}
+
+// Create ripple effect for helpline links
+function createHelplineRipple(event, element) {
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    const ripple = document.createElement('span');
+    ripple.style.cssText = `
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(102, 126, 234, 0.6);
+        transform: scale(0);
+        animation: helplineRipple 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        left: ${x}px;
+        top: ${y}px;
+        width: ${size}px;
+        height: ${size}px;
+        pointer-events: none;
+        z-index: 1000;
+    `;
+    
+    // Add ripple animation keyframes if not exists
+    if (!document.getElementById('helplineRippleStyle')) {
+        const style = document.createElement('style');
+        style.id = 'helplineRippleStyle';
+        style.textContent = `
+            @keyframes helplineRipple {
+                0% { transform: scale(0); opacity: 1; }
+                100% { transform: scale(2); opacity: 0; }
+            }
+            @keyframes slideInUp {
+                0% { opacity: 0; transform: translateY(30px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    const parent = element.parentElement;
+    parent.style.position = 'relative';
+    parent.style.overflow = 'hidden';
+    parent.appendChild(ripple);
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 800);
+}
+
+// Show tooltip for feature items
+function showHelplineTooltip(element, text) {
+    // Remove existing tooltip
+    const existingTooltip = document.querySelector('.helpline-tooltip');
+    if (existingTooltip) {
+        existingTooltip.remove();
+    }
+    
+    const tooltip = document.createElement('div');
+    tooltip.className = 'helpline-tooltip';
+    tooltip.textContent = text;
+    tooltip.style.cssText = `
+        position: absolute;
+        background: rgba(0,0,0,0.9);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 14px;
+        max-width: 250px;
+        z-index: 1001;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+        pointer-events: none;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    `;
+    
+    document.body.appendChild(tooltip);
+    
+    const rect = element.getBoundingClientRect();
+    tooltip.style.left = (rect.left + rect.width/2 - tooltip.offsetWidth/2) + 'px';
+    tooltip.style.top = (rect.bottom + 10) + 'px';
+    
+    // Show tooltip
+    setTimeout(() => {
+        tooltip.style.opacity = '1';
+        tooltip.style.transform = 'translateY(0)';
+    }, 10);
+    
+    // Hide tooltip after 3 seconds
+    setTimeout(() => {
+        tooltip.style.opacity = '0';
+        tooltip.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+            tooltip.remove();
+        }, 300);
+    }, 3000);
+}
+
+// Add scroll to helpline function
+function scrollToHelpline() {
+    console.log('📞 Scrolling to helpline section...');
+    const helplineSection = document.getElementById('helpline-section');
+    
+    if (helplineSection) {
+        const offset = isMobile() ? 80 : 100;
+        const offsetTop = helplineSection.offsetTop - offset;
+        
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
+        
+        console.log('✅ Successfully scrolled to helpline section');
+        
+        // Highlight effect
+        setTimeout(() => {
+            helplineSection.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            helplineSection.style.transform = isMobile() ? 'scale(1.01)' : 'scale(1.02)';
+            helplineSection.style.boxShadow = '0 25px 50px rgba(102, 126, 234, 0.6)';
+            
+            setTimeout(() => {
+                helplineSection.style.transform = 'scale(1)';
+                helplineSection.style.boxShadow = '0 15px 35px rgba(0,0,0,0.1)';
+            }, 1200);
+        }, 600);
+    } else {
+        console.error('❌ Helpline section not found');
+    }
+}
+
+// Initialize helpline functionality when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Add to existing initialization
+    setTimeout(() => {
+        initializeHelplineSection();
+    }, 500);
+});
+
+// Update the existing DOMContentLoaded event listener to include helpline
+// Add this to your existing initialization functions
