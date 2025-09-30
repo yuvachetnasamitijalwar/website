@@ -859,6 +859,22 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeHelplineSection();
     }, 500);
 });
+// Very Simple Download Function
+function downloadAndOpenDownloads(filePath, fileName) {
+    // Step 1: File को download करें
+    const a = document.createElement('a');
+    a.href = filePath;
+    a.download = fileName;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    // Step 2: 1 second बाद downloads page खोलें
+    setTimeout(() => {
+        window.open('chrome://downloads/', '_blank');
+    }, 1000);
+}
 
 // Update the existing DOMContentLoaded event listener to include helpline
 // Add this to your existing initialization functions
