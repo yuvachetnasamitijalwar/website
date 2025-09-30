@@ -1420,3 +1420,380 @@ img {
         border: 1px solid #ccc !important;
     }
 }
+/* Enhanced Helpline Section */
+.helpline-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+    background-size: 400% 400%;
+    animation: helplineGradient 12s ease infinite;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid rgba(255,255,255,0.3);
+    margin: 40px 0;
+}
+
+@keyframes helplineGradient {
+    0%, 100% { background-position: 0% 50%; }
+    25% { background-position: 25% 75%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 75% 25%; }
+}
+
+.helpline-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+}
+
+.helpline-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.helpline-section .section-title {
+    color: white;
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 15px;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+    border: none;
+    padding: 0;
+    animation: helplineTitleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes helplineTitleGlow {
+    0% { text-shadow: 3px 3px 6px rgba(0,0,0,0.4); }
+    100% { text-shadow: 3px 3px 15px rgba(255,255,255,0.6); }
+}
+
+.section-subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    margin-bottom: 50px;
+    font-style: italic;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.helpline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.helpline-info {
+    text-align: center;
+    background: rgba(255,255,255,0.15);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.helpline-title {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: helplineTitlePulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes helplineTitlePulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+.helpline-description {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.helpline-contacts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.helpline-item {
+    background: rgba(255,255,255,0.95);
+    color: #333;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    border: 2px solid rgba(255,255,255,0.3);
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+.helpline-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+    transition: left 0.8s ease;
+}
+
+.helpline-item:hover::before {
+    left: 100%;
+}
+
+.helpline-item:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 25px 50px rgba(102, 126, 234, 0.4);
+    border-color: #667eea;
+}
+
+.helpline-icon {
+    font-size: 3rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    animation: helplineIconSpin 4s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes helplineIconSpin {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(10deg) scale(1.1); }
+}
+
+.helpline-details {
+    flex: 1;
+}
+
+.helpline-details h4 {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.helpline-number, .helpline-email {
+    color: #667eea;
+    text-decoration: none;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.helpline-number:hover, .helpline-email:hover {
+    color: #764ba2;
+    transform: scale(1.05);
+    text-shadow: 2px 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.helpline-timing {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    color: #666;
+    margin: 0;
+    font-style: italic;
+}
+
+.helpline-features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.feature-item {
+    background: rgba(255,255,255,0.2);
+    padding: 15px 25px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.feature-item:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    animation: featureIconBounce 2s ease-in-out infinite;
+}
+
+@keyframes featureIconBounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+.feature-text {
+    font-weight: 600;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Mobile Responsive Design for Helpline */
+@media (max-width: 768px) {
+    .helpline-container {
+        gap: 30px;
+    }
+    
+    .helpline-contacts {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .helpline-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 25px 20px;
+    }
+    
+    .helpline-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 2.5rem;
+    }
+    
+    .helpline-features {
+        gap: 15px;
+    }
+    
+    .feature-item {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .helpline-info {
+        padding: 20px 15px;
+    }
+    
+    .helpline-item {
+        padding: 20px 15px;
+    }
+    
+    .helpline-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+    
+    .helpline-features {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .feature-item {
+        width: 100%;
+        justify-content: center;
+        max-width: 250px;
+    }
+}
+/* Navigation Menu Fix for Helpline */
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: nowrap; /* Change from wrap to nowrap */
+    gap: 2px; /* Reduce gap from 5px to 2px */
+    overflow-x: auto; /* Add horizontal scroll if needed */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.nav-menu li {
+    margin: 0;
+    flex-shrink: 0; /* Prevent items from shrinking */
+}
+
+.nav-link {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 12px 15px; /* Reduce padding from 15px 20px to 12px 15px */
+    font-weight: 600;
+    font-size: clamp(12px, 2.2vw, 14px); /* Reduce font size slightly */
+    transition: all 0.4s ease;
+    border-radius: 20px; /* Reduce from 25px to 20px */
+    margin: 2px;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.3px; /* Reduce from 0.5px to 0.3px */
+}
+
+/* Mobile specific navigation adjustments */
+@media (max-width: 1200px) {
+    .nav-link {
+        padding: 10px 12px;
+        font-size: clamp(11px, 2vw, 13px);
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-wrap: wrap; /* Allow wrapping on mobile */
+        justify-content: center;
+        gap: 3px;
+    }
+    
+    .nav-link {
+        padding: 8px 10px;
+        font-size: 12px;
+        margin: 1px;
+    }
+}
+
+/* Alternative: Two-row navigation for tablets */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .nav-menu {
+        flex-wrap: wrap;
+        max-width: 100%;
+        justify-content: center;
+        gap: 3px;
+    }
+    
+    .nav-menu li:nth-child(5) {
+        flex-basis: 100%; /* Force break after 4th item */
+        order: 1;
+    }
+    
+    .nav-menu li:nth-child(n+5) {
+        order: 1;
+    }
+}
