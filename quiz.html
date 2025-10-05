@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>क्विज प्रतियोगिता पंजीकरण- 2026</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     /* Reset and Basic Styles */
@@ -14,6 +15,7 @@
       font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     }
 
+
     /* --- Color Palette (New: Teal & Coral) ---
     Primary Accent (Dark Teal): #00796b
     Secondary Accent (Coral Orange): #ff7043
@@ -21,6 +23,7 @@
     Error Color: #d32f2f (Deep Red)
     Success (Valid Field): #004d40 (Darker Teal)
     */
+
 
     body {
       /* UPDATED: Slightly deeper and more saturated blue gradient */
@@ -35,6 +38,7 @@
       overflow-x: hidden;
       font-size: 16px;
     }
+
 
     /* Subtle background pattern */
     body::before {
@@ -51,6 +55,7 @@
       z-index: 0;
     }
 
+
     .container {
       /* UPDATED: A clearer, slightly more saturated light blue tint */
       background: #E8F6FF; 
@@ -66,12 +71,14 @@
       overflow: hidden;
     }
 
+
     .header { 
       text-align: center; 
       position: relative; 
       margin-bottom: 30px; 
       user-select: none; 
     }
+
 
     .header div.logo-title {
       display: flex; 
@@ -81,6 +88,7 @@
       gap: 15px; 
       margin-bottom: 10px;
     }
+
 
     .header div.logo-title img.logo {
       /* Placeholder image details */
@@ -97,10 +105,12 @@
     }
 
 
+
     .header div.logo-title img.logo:hover {
       transform: scale(1.05) rotate(2deg);
       box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
+
 
     .header h1 {
       font-size: 2.9rem; 
@@ -115,10 +125,12 @@
       justify-content: center;
     }
 
+
     .quiz-icon { 
       font-size: 3rem; 
       color: #00796b; /* Dark Teal for icon */
     }
+
 
     .header p { 
       font-size: 1.2rem; 
@@ -128,11 +140,13 @@
       margin-top: 8px;
     }
 
+
     form { 
       display: flex; 
       flex-direction: column; 
       gap: 22px; 
     }
+
 
     .form-group { 
       display: flex; 
@@ -140,6 +154,7 @@
       gap: 8px; 
       position: relative;
     }
+
 
     label { 
       font-weight: 600; 
@@ -149,9 +164,11 @@
       transition: color 0.3s ease;
     }
 
+
     .form-group:focus-within label {
       color: #00796b; /* Dark Teal on focus */
     }
+
 
     input[type="text"], input[type="email"], input[type="tel"], input[type="number"], select, textarea {
       padding: 16px 20px; 
@@ -164,6 +181,7 @@
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
     }
 
+
     input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="number"]:focus,
     select:focus, textarea:focus {
       border-color: #00796b; /* Dark Teal border on focus */
@@ -175,6 +193,7 @@
     }
     
     /* VALIDATION STYLES */
+
 
     /* Style for fields that pass client-side validation (Darker Teal) */
     input[type="text"]:valid:not(:placeholder-shown):not(:focus), 
@@ -194,10 +213,12 @@
     /* End of Validation Styles */
 
 
+
     select[multiple] { 
       height: 120px; 
       padding: 10px;
     }
+
 
     select option {
         padding: 8px 12px;
@@ -217,6 +238,7 @@
       line-height: 1.5;
     }
 
+
     .checkbox-group { 
       display: flex; 
       align-items: center; 
@@ -227,9 +249,11 @@
       transition: background-color 0.3s ease;
     }
 
+
     .checkbox-group:hover {
       background-color: rgba(0, 121, 107, 0.05); /* Light teal hover */
     }
+
 
     .checkbox-group input[type="checkbox"] {
       width: 22px; 
@@ -242,14 +266,17 @@
       border: 2px solid #adb5bd;
     }
 
+
     .checkbox-group input[type="checkbox"]:hover { 
       transform: scale(1.15);
       box-shadow: 0 0 10px rgba(0, 121, 107, 0.3);
     }
 
+
     .checkbox-group input[type="checkbox"]:checked {
       animation: checkBounce 0.3s ease;
     }
+
 
     @keyframes checkBounce {
       0% { transform: scale(1); }
@@ -257,12 +284,14 @@
       100% { transform: scale(1.1); }
     }
 
+
     .checkbox-group label {
       cursor: pointer;
       font-size: 1rem;
       line-height: 1.4;
       color: #495057;
     }
+
 
     button.submit-btn {
       margin-top: 15px;
@@ -284,11 +313,13 @@
       letter-spacing: 1px;
     }
 
+
     button.submit-btn:hover { 
       box-shadow: 0 15px 40px rgba(255, 112, 67, 0.6); 
       transform: translateY(-4px) scale(1.02);
       background: #f4511e; /* Slightly deeper orange on hover */
     }
+
 
     button.submit-btn:active {
       transform: translateY(-2px) scale(0.98);
@@ -313,10 +344,12 @@
       display: none; /* Hide by default */
     }
 
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
+
 
     /* Enhanced mobile responsiveness */
     @media (max-width: 600px) {
@@ -346,61 +379,21 @@
       }
     }
     
-    /* Loading Progress Bar */
-    .submit-btn .content {
-      display: block;
+    /* Loading Progress Bar - Now represents button state */
+    .submit-btn .btn-text {
       transition: opacity 0.3s ease;
     }
-    
-    .submit-btn.loading .content {
+    .submit-btn.loading .btn-text {
       opacity: 0;
-      pointer-events: none;
     }
-
-    .progress-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        padding: 0 20px;
+    .submit-btn.loading::after {
+      content: 'Processing...';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.2rem;
     }
-
-    .submit-btn.loading .progress-container {
-        opacity: 1;
-    }
-    
-    .progress-bar {
-        width: 100%;
-        height: 8px;
-        background-color: rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .progress-fill {
-        background: #ff7043; /* Coral Orange progress fill */
-        height: 100%;
-        width: 0%;
-        transition: width 0.1s linear;
-        border-radius: 10px;
-    }
-
-    .progress-text {
-        color: #000000;
-        font-size: 0.9rem;
-        font-weight: 600;
-        margin-left: 15px;
-        width: 40px;
-        text-align: right;
-    }
-
   </style>
 </head>
 <body>
@@ -419,46 +412,39 @@
       <p><strong>युवा चेतना समिति, राम-जानकी मंदिर जलवार !!</strong></p>
     </div>
     <form id="quizForm" novalidate>
+      <!-- All your form-groups remain exactly the same -->
       <div class="form-group">
         <label for="firstName">First Name *</label>
         <input type="text" id="firstName" name="firstName" required autocomplete="given-name" placeholder="अपना पहला नाम दर्ज करें" pattern="[A-Za-z\s]+" title="केवल अक्षर ही मान्य हैं।" />
       </div>
-
       <div class="form-group">
         <label for="lastName">Last Name *</label>
         <input type="text" id="lastName" name="lastName" required autocomplete="family-name" placeholder="अपना अंतिम नाम दर्ज करें" pattern="[A-Za-z\s]+" title="केवल अक्षर ही मान्य हैं।" />
       </div>
-
       <div class="form-group">
         <label for="fatherName">Father's Name *</label>
         <input type="text" id="fatherName" name="fatherName" required placeholder="अपने पिता का नाम दर्ज करें" pattern="[A-Za-z\s]+" title="केवल अक्षर ही मान्य हैं।" />
       </div>
-
       <div class="form-group">
         <label for="email">Email Address *</label>
         <input type="email" id="email" name="email" required autocomplete="email" placeholder="example@email.com" title="कृपया एक वैध ईमेल पता दर्ज करें।" />
       </div>
-
       <div class="form-group">
         <label for="phone">Phone Number *</label>
         <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+91 12345 67890" pattern="^\+?[0-9\s-]{10,15}$" title="कृपया 10 अंकों वाला फ़ोन नंबर दर्ज करें।" />
       </div>
-
       <div class="form-group">
         <label for="age">Age *</label>
         <input type="number" id="age" name="age" min="13" max="100" required placeholder="आपकी उम्र" title="उम्र 13 से 100 के बीच होनी चाहिए।" />
       </div>
-
       <div class="form-group">
         <label for="organization">School/College/Organization *</label>
         <input type="text" id="organization" name="organization" required placeholder="आपके स्कूल/कॉलेज का नाम" pattern="[A-Za-z0-9\s.,-]+" title="केवल अक्षर, नंबर, और कुछ विशेष वर्ण (.,-) मान्य हैं।" />
       </div>
-
       <div class="form-group">
         <label for="address">Address *</label>
         <input type="text" id="address" name="address" required placeholder="आपका पूरा पता" pattern="[A-Za-z0-9\s.,-]+" title="केवल अक्षर, नंबर, और कुछ विशेष वर्ण (.,-) मान्य हैं।" />
       </div>
-
       <div class="form-group">
         <label for="category">Competition Category *</label>
         <select id="category" name="category" required>
@@ -467,15 +453,12 @@
           <option value="class9to12">Class 9th to 12th</option>
         </select>
       </div>
-
       <div class="form-group">
         <label for="class">Class *</label>
         <select id="class" name="class" required>
           <option value="">Select Class</option>
-          <!-- Options will be dynamically added here -->
         </select>
       </div>
-
       <div class="form-group">
         <label for="subjects">Preferred Subject Areas (Optional)</label>
         <select id="subjects" name="subjects" multiple aria-multiselectable="true" size="6">
@@ -487,63 +470,46 @@
           <option value="general">General Knowledge</option>
         </select>
       </div>
-
       <div class="form-group">
         <label for="experience">Previous Quiz Experience (Optional)</label>
         <textarea id="experience" name="experience" rows="3" placeholder="अपने क्विज़ प्रतियोगिता के अनुभव के बारे में बताएं..."></textarea>
       </div>
-
       <div class="checkbox-group">
         <input type="checkbox" id="terms" name="terms" required aria-required="true" />
         <label for="terms">I agree to the terms and conditions and privacy policy *</label>
       </div>
-
       <div class="checkbox-group">
         <input type="checkbox" id="newsletter" name="newsletter" />
         <label for="newsletter">Subscribe to our newsletter for quiz updates</label>
       </div>
 
       <button type="submit" class="submit-btn" aria-label="Register for Quiz Competition">
-        <span class="content"><i class="fas fa-paper-plane"></i> Register Now</span>
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="progress-text" id="progressText">0%</div>
-        </div>
+        <span class="btn-text"><i class="fas fa-paper-plane"></i> Register Now</span>
       </button>
 
       <div class="info-message" id="alertMessage"></div>
-
     </form>
   </div>
+  
   <script>
-    // Utility function to set error state
+    // All your helper functions and DOMContentLoaded setup remains the same
     function setError(message, fieldId = null) {
       const alertMessage = document.getElementById('alertMessage');
       alertMessage.style.display = 'block';
       alertMessage.classList.add('error');
       alertMessage.innerHTML = message;
-      
-      // Highlight the specific field in error
       if (fieldId) {
         const field = document.getElementById(fieldId);
         if (field) {
-            field.focus(); // Focus on the first error field
-            // Note: CSS handles the red border based on the :invalid selector
+            field.focus();
         }
       }
     }
 
-    // Utility function to clear error state
     function clearError() {
       const alertMessage = document.getElementById('alertMessage');
       alertMessage.style.display = 'none';
       alertMessage.classList.remove('error');
-      // Clear red border from all fields, though CSS should primarily manage this
-      document.querySelectorAll('input:invalid, select:invalid').forEach(el => {
-          el.style.borderColor = ''; // Revert to default or CSS rules
-      });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -551,19 +517,14 @@
       const classSelect = document.getElementById('class');
       const quizForm = document.getElementById('quizForm');
       const submitBtn = document.querySelector('.submit-btn');
-      const progressFill = document.getElementById('progressFill');
-      const progressText = document.getElementById('progressText');
-
-      // Function to dynamically update class options based on category
+      
       const updateClassOptions = (category) => {
         classSelect.innerHTML = '<option value="">Select Class</option>';
-        let classes;
+        let classes = [];
         if (category === 'class5to8') {
           classes = [5, 6, 7, 8];
         } else if (category === 'class9to12') {
           classes = [9, 10, 11, 12];
-        } else {
-          classes = [];
         }
         classes.forEach(cls => {
           const option = document.createElement('option');
@@ -573,14 +534,11 @@
         });
       };
 
-      // Event listener for category change
       categorySelect.addEventListener('change', (e) => {
         updateClassOptions(e.target.value);
-        // Clear class selection if category changes
         classSelect.value = "";
       });
       
-      // Function to find the first invalid element
       function findFirstInvalidElement(form) {
         const elements = form.querySelectorAll('input, select, textarea');
         for (const el of elements) {
@@ -590,41 +548,37 @@
         }
         return null;
       }
+      
+      // Clear error message on input
+      document.querySelectorAll('input, select, textarea').forEach(input => {
+          input.addEventListener('input', () => clearError());
+      });
 
-
-      // Form submission logic
+      // ==========================================================
+      // START OF MODIFIED CODE: Razorpay Integration Logic
+      // ==========================================================
       quizForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-        clearError(); // Clear previous errors
+        clearError();
 
-        // Find the first invalid element
+        // --- Your existing validation logic ---
         const firstInvalid = findFirstInvalidElement(quizForm);
-
         if (firstInvalid) {
-          // Determine the most specific error message
           let errorMessage = 'कृपया सभी आवश्यक फ़ील्ड्स को सही ढंग से भरें।';
-          
           if (firstInvalid.type === 'checkbox' && firstInvalid.id === 'terms' && !firstInvalid.checked) {
               errorMessage = 'कृपया पंजीकरण के लिए नियम और शर्तों से सहमत हों।';
-          } else if (firstInvalid.id === 'age') {
+          } else if (firstInvalid.title) {
               errorMessage = firstInvalid.title;
-          } else if (firstInvalid.type === 'email' || firstInvalid.type === 'tel') {
-              errorMessage = firstInvalid.title;
-          } else if (firstInvalid.validity.patternMismatch) {
-              errorMessage = firstInvalid.title || 'कृपया इस फ़ील्ड के लिए केवल वैध वर्ण (Valid Characters) दर्ज करें।';
           } else if (firstInvalid.validity.valueMissing) {
               errorMessage = 'यह फ़ील्ड आवश्यक है। कृपया इसे भरें।';
           }
-
           setError(errorMessage, firstInvalid.id);
           return;
         }
 
-        // Additional validation for class selection based on category
         const selectedCategory = categorySelect.value;
         const selectedClass = parseInt(classSelect.value);
         let isValidClass = false;
-
         if (selectedCategory && selectedClass) {
              if (selectedCategory === 'class5to8' && selectedClass >= 5 && selectedClass <= 8) {
               isValidClass = true;
@@ -632,27 +586,16 @@
               isValidClass = true;
             }
         }
-
-
         if (classSelect.value === "" || !isValidClass) {
           setError('कृपया सही कैटेगरी के अनुसार क्लास चुनें।', 'class');
           return;
         }
+        // --- End of validation logic ---
 
-        // Proceed with submission process
         submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
 
-        let progress = 0;
-        // Progress bar is slightly slower now: interval 150ms, increment 3
-        const progressInterval = setInterval(() => {
-            if (progress < 90) {
-                progress += 3;
-                progressFill.style.width = `${progress}%`;
-                progressText.innerText = `${progress}%`;
-            }
-        }, 150);
-
-        const data = {
+        const formData = {
           name: document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim(),
           fatherName: document.getElementById('fatherName').value.trim(),
           email: document.getElementById('email').value.trim(),
@@ -662,73 +605,93 @@
           address: document.getElementById('address').value.trim(),
           category: selectedCategory,
           class: selectedClass,
-          subjects: Array.from(document.getElementById('subjects').options).filter(opt => opt.selected).map(opt => opt.value),
+          subjects: Array.from(document.getElementById('subjects').selectedOptions).map(opt => opt.value),
           experience: document.getElementById('experience').value || '',
           termsAgreed: document.getElementById('terms').checked,
           subscribedNewsletter: document.getElementById('newsletter').checked
         };
 
         try {
-          const response = await fetch('https://quiz-backend-nhyn.onrender.com/api/quiz/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-          });
+            // Step 1: Create Order on Backend
+            const response = await fetch('https://quiz-backend-nhyn.onrender.com/api/quiz/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
 
-          const result = await response.json();
+            const result = await response.json();
 
-          if (response.ok) {
-            progress = 100;
-            progressFill.style.width = '100%';
-            progressText.innerText = '100%';
-            clearInterval(progressInterval);
-            setTimeout(() => {
-                // Success action
-                window.open('success.html', '_blank');
-                quizForm.reset();
-            }, 500);
-          } else {
-            setError('पंजीकरण विफल रहा: ' + (result.error || 'अज्ञात त्रुटि'));
-          }
+            if (!result.success) {
+                setError(result.error || 'पंजीकरण के लिए ऑर्डर बनाने में विफल।');
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                return;
+            }
+
+            const { order, key_id } = result;
+
+            // Step 2: Open Razorpay Payment Popup
+            const options = {
+                key: key_id,
+                amount: order.amount,
+                currency: "INR",
+                name: "Quiz Competition 2026",
+                description: "Registration Fee",
+                image: "images/quiz_logo.jpg",
+                order_id: order.id,
+                handler: function (response) {
+                    // Step 3: On success, auto-submit a form for verification
+                    const verificationForm = document.createElement('form');
+                    verificationForm.method = 'POST';
+                    verificationForm.action = 'https://quiz-backend-nhyn.onrender.com/api/quiz/payment-verification';
+                    verificationForm.style.display = 'none';
+
+                    const inputs = {
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_signature: response.razorpay_signature
+                    };
+
+                    for (const key in inputs) {
+                        const input = document.createElement('input');
+                        input.name = key;
+                        input.value = inputs[key];
+                        verificationForm.appendChild(input);
+                    }
+                    document.body.appendChild(verificationForm);
+                    verificationForm.submit();
+                },
+                prefill: {
+                    name: formData.name,
+                    email: formData.email,
+                    contact: formData.phone
+                },
+                theme: {
+                    color: "#00796b"
+                },
+                modal: {
+                    ondismiss: function() {
+                        // Re-enable button if user closes the payment popup
+                        setError('भुगतान रद्द कर दिया गया।');
+                        submitBtn.classList.remove('loading');
+                        submitBtn.disabled = false;
+                    }
+                }
+            };
+
+            const rzp1 = new Razorpay(options);
+            rzp1.open();
+
         } catch (error) {
-          setError('नेटवर्क/सर्वर त्रुटि: ' + error.message);
-        } finally {
-          clearInterval(progressInterval);
-          submitBtn.classList.remove('loading');
-          progressFill.style.width = '0%';
-          progressText.innerText = '0%';
+            setError('नेटवर्क या सर्वर से कनेक्ट करने में कोई समस्या हुई। कृपया पुनः प्रयास करें।');
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
         }
       });
-      
-      // Clear error message when user starts typing again
-      const inputs = document.querySelectorAll('input, select, textarea');
-      inputs.forEach(input => {
-        input.addEventListener('input', function() {
-           clearError();
-           // Optional: clear red border if valid, though CSS handles it
-           if (this.checkValidity()) {
-               this.style.borderColor = '#004d40'; /* Darker Teal for valid */
-           } else {
-               this.style.borderColor = '#d32f2f'; /* Red border for invalid */
-           }
-        });
-        
-        // Ensure that blur events also check validity and apply immediate feedback
-        input.addEventListener('blur', function() {
-            if (this.checkValidity()) {
-                // This ensures green border remains after unfocusing a valid field
-                this.style.borderColor = '#004d40';
-            } else if (this.value) {
-                // This ensures red border remains after unfocusing an invalid field
-                this.style.borderColor = '#d32f2f';
-            } else {
-                // Revert to default border if empty and unfocused
-                this.style.borderColor = '#ced4da';
-            }
-        });
-      });
+      // ==========================================================
+      // END OF MODIFIED CODE
+      // ==========================================================
     });
   </script>
 </body>
 </html>
-
