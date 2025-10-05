@@ -3,294 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Successful - युवा चेतना समिति</title>
+    <title>Quiz Registration Successful - युवा चेतना समिति, जलवार</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+        
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(45deg, #FF6B6B, #F8CD4F, #50E3C2, #4A90E2, #7B68EE);
+            font-family: 'Inter', sans-serif;
+            /* New: Deep Aurora Gradient Background */
+            background: linear-gradient(135deg, #1e3a8a, #4f46e5, #9333ea);
             background-size: 400% 400%;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 2rem;
-            animation: vibrantGradient 15s ease infinite;
+            padding: 1.5rem; 
+            /* Slower, more dynamic gradient shift */
+            animation: auroraGradient 40s ease infinite alternate; 
+            perspective: 1000px; /* For 3D transform on card */
         }
+        
+        /* New: Aurora Gradient Keyframes */
+        @keyframes auroraGradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
         .card {
             background: white;
-            border-radius: 2rem;
-            padding: 2.5rem;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            max-width: 750px;
+            border-radius: 2.5rem; 
+            padding: 4rem 3rem; 
+            /* Deeper, more refined shadow for floating effect */
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6), 
+                        0 0 0 1px rgba(255, 255, 255, 0.1); 
+            max-width: 600px;
             width: 100%;
             text-align: center;
             position: relative;
-            overflow: hidden;
-            border: 2px solid #fff;
+            z-index: 10;
+            /* Initial 3D Tilt for pop-out effect */
+            transform: rotateX(2deg) rotateY(-2deg) translateZ(0);
             animation: slideInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.5s ease;
         }
-        .floating-blob {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, #FF6B6B, #F8CD4F);
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
-            animation: float 10s infinite ease-in-out;
-            z-index: 0;
-        }
-        .blob-1 { top: -50px; left: -50px; animation-delay: 0s; }
-        .blob-2 { bottom: -50px; right: -50px; animation-delay: 2s; }
 
+        /* Enhanced Icon Container with Radial Glow */
         .icon-container {
-            width: 120px;
-            height: 120px;
-            background: #28a745;
+            width: 160px; 
+            height: 160px;
+            background: radial-gradient(circle at center, #34D399 0%, #059669 100%);
             border-radius: 50%;
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             position: relative;
-            z-index: 1;
-            animation: popIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 4px solid #fff;
-            box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* Stronger, pulsing shadow for glow effect */
+            box-shadow: 0 0 0 10px rgba(52, 211, 153, 0.3), 
+                        0 0 80px rgba(52, 211, 153, 0.8); /* Stronger outer glow */
         }
+        
         .icon-container i {
             color: white;
-            font-size: 4rem;
+            font-size: 5.5rem; 
+            animation: pulse 1.5s infinite;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 1);
         }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 1; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+            50% { transform: scale(1); opacity: 0.9; box-shadow: 0 0 0 20px rgba(52, 211, 153, 0); }
+            100% { transform: scale(0.95); opacity: 1; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+        }
+
         .title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
+            font-size: 3.5rem; 
+            font-weight: 900;
+            color: #1F2937;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
         }
+        
+        .highlight-text {
+            font-size: 1.75rem; 
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            /* More vibrant gradient */
+            background: linear-gradient(90deg, #f97316, #ef4444, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
         .subtitle {
-            font-size: 1.25rem;
-            color: #666;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 1;
+            font-size: 1.15rem; 
+            color: #4B5563; 
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
         }
-        .info-section {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .info-card {
-            background: #f8f9fa;
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            text-align: left;
-            border: 1px solid #e0e0e0;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            z-index: 1;
-        }
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-        .info-card h4 {
-            font-weight: 700;
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: #7B68EE;
-        }
-        .info-card p, .info-card strong {
-            color: #555;
-            font-size: 1rem;
-        }
+        
         .btn-group {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2.5rem;
-            position: relative;
-            z-index: 1;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
         }
-        .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 9999px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        }
+        
+        /* Primary Button Style - Added slight shadow on text for depth */
         .btn-primary {
-            background: linear-gradient(135deg, #4A90E2, #50E3C2);
+            background: linear-gradient(90deg, #8B5CF6, #EC4899);
             color: white;
             border: none;
+            padding: 1rem 3rem; 
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); 
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
+        
         .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transform: translateY(-5px) scale(1.02) rotateX(0deg) rotateY(0deg); /* Removes 3D tilt on hover for smooth interaction */
+            box-shadow: 0 18px 35px rgba(139, 92, 246, 0.5); 
+            opacity: 1;
         }
-        .btn-success {
-            background: #25d366;
-            color: white;
-            border: none;
-        }
-        .btn-success:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-        .btn-secondary {
-            background: #e0e0e0;
-            color: #555;
-            border: none;
-        }
-        .btn-secondary:hover {
-            transform: scale(1.05);
-            background: #d4d4d4;
-        }
+        
         .footer-text {
-            margin-top: 3rem;
-            color: #888;
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 1;
+            margin-top: 3rem; 
+            color: #9CA3AF;
+            font-size: 1rem; 
         }
-        @keyframes vibrantGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+
+        /* Styling for the new PDF section */
+        .pdf-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); /* Light complementary gradient */
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.05); /* Soft inner shadow */
         }
+        
+        .pdf-item {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            border-left: 5px solid #4f46e5; /* Indigo accent color */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .pdf-item:hover {
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .pdf-download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Button gradient as provided */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .pdf-download-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.03);
+        }
+
+
+        /* Generic Slide In animation */
         @keyframes slideInUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from { transform: translateY(50px) rotateX(10deg); opacity: 0; }
+            to { transform: translateY(0) rotateX(2deg) rotateY(-2deg); opacity: 1; }
         }
+        
         @keyframes popIn {
             from { transform: scale(0); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(20px, 20px); }
-            100% { transform: translate(0, 0); }
-        }
-        .highlight {
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: bold;
-            font-size: 20px;
-        }
-        .payment-info, .whatsapp-info, .razorpay-info, .important-note {
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        .razorpay-info {
-            background: #e3f2fd;
-            border-left: 5px solid #2196f3;
-        }
-        .payment-steps {
-            text-align: left;
-            margin: 1.5rem 0;
-        }
-        .payment-steps ol {
-            padding-left: 20px;
-            list-style: none;
-        }
-        .payment-steps li {
-            margin: 10px 0;
-            font-size: 16px;
-            color: #555;
-            position: relative;
-            padding-left: 25px;
-        }
-        .payment-steps li::before {
-            content: counter(step-counter);
-            counter-increment: step-counter;
-            background-color: #4A90E2;
-            color: white;
-            font-weight: bold;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            position: absolute;
-            left: 0;
-            top: 0;
+        
+        /* MOBILE OPTIMIZATIONS */
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+                /* Remove 3D perspective on mobile for performance and flatness */
+                perspective: none; 
+            }
+            .card {
+                padding: 3rem 1.5rem;
+                border-radius: 2rem;
+                /* Reset 3D transform on mobile */
+                transform: none !important; 
+            }
+            .title {
+                font-size: 2.25rem; 
+            }
+            .highlight-text {
+                font-size: 1.3rem; 
+            }
+            .subtitle {
+                font-size: 1rem; 
+            }
+            .icon-container {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 2rem;
+            }
+            .icon-container i {
+                font-size: 4rem;
+            }
+            .btn-primary {
+                padding: 0.8rem 2rem; 
+                font-size: 1rem;
+            }
+            .footer-text {
+                margin-top: 2rem;
+            }
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.min.js"></script>
 </head>
 <body>
-    <div class="floating-blob blob-1"></div>
-    <div class="floating-blob blob-2"></div>
     <div class="card">
         <div class="icon-container">
-            <i class="fas fa-check"></i>
+            <i class="fas fa-trophy"></i> <!-- Updated icon to a trophy for quiz success -->
         </div>
-        <h1 class="title">Registration Successful!</h1>
         
-        <p class="subtitle highlight">बधाई हो! आपका registration सफलतापूर्वक हो गया है।</p>
-        <p class="subtitle">Check your email for confirmation details.</p>
+        <h1 class="title">क्विज़ में सफलता!</h1>
+        
+        <p class="highlight-text">
+            🎉 हार्दिक बधाई! आपका स्थान सुरक्षित।
+        </p>
 
-        <div class="info-section">
-            <div class="info-card razorpay-info">
-                <h4>💳 Online Payment - Razorpay</h4>
-                <p><strong>Payment Link: YUVA CHETNA SAMITI JALWAR</strong></p>
-                <p>आप नीचे दिए गए button पर click करके online payment कर सकते हैं।</p>
-            </div>
-            
-            <div class="info-card" style="counter-reset: step-counter;">
-                <h4>🔄 Payment Process:</h4>
-                <div class="payment-steps">
-                    <ol>
-                        <li><strong>Pay Online</strong> - नीचे <strong> "Pay with Razorpay"</strong> button पर click करें।</li>
-                        <li><strong>Payment initiate करें</strong> -Amount में ₹25 डालें। और <strong>"ADD A NOTE"</strong> में अपना नाम डालें जिससे क्विज़ में रजिस्टर किया था।</li>
-                        <li><strong>screenshot लें</strong> - Payment successful होने के बाद screenshot लें</li>
-                                           </ol>
+        <p class="subtitle">
+            युवा चेतना समिति, <strong>जलवार (Jalwar)</strong> की तरफ से धन्यवाद। आपका रजिस्ट्रेशन सफल रहा एवं आपको <strong>क्विज़ की तिथि, समय और प्रतियोगिता लिंक</strong> की जानकारी जल्द ही आपके रजिस्टर्ड ईमेल और मोबाइल नंबर पर भेजी जाएगी।
+        </p>
+        
+        <!-- Existing: Next Step (Agale Kadam) -->
+        <div class="p-4 mt-6 mb-4 bg-yellow-50 border border-yellow-200 rounded-xl">
+            <p class="text-sm font-semibold text-yellow-800">
+                <i class="fas fa-exclamation-triangle mr-2"></i> <strong>अगले कदम (Next Step):</strong>
+            </p>
+            <p class="text-xs text-gray-700 mt-1 leading-relaxed">
+                कृपया अपने ईमेल और SMS को नियमित रूप से जांचते रहें। प्रतियोगिता से पहले सभी नियम और दिशानिर्देश (Guidelines) साझा किए जाएंगे।
+            </p>
+        </div>
+        <!-- End Existing Next Step -->
+
+        <!-- New Section: Previous Year Question Papers (पिछले वर्षों के प्रश्न पत्र) -->
+        <div id="questions-section" class="pdf-section mt-8">
+            <h2 class="text-xl font-extrabold text-gray-800 mb-4">पिछले वर्षों के प्रश्न पत्र</h2>
+            <p class="text-sm text-gray-600 mb-6">
+                तैयारी में मदद के लिए यहाँ पिछले वर्षों के प्रश्न पत्र उपलब्ध हैं। इन्हें डाउनलोड करके अभ्यास करें और बेहतर प्रदर्शन के लिए तैयार रहें।
+            </p>
+
+            <div class="pdf-container space-y-4">
+                <!-- PDF Item 1 (5th to 8th) -->
+                <div class="pdf-item">
+                    <h4 class="text-lg font-semibold text-gray-700 mb-1">📄 वर्ष 2025 - प्रथम श्रेणी (कक्षा 5-8)</h4>
+                    <p class="text-sm text-gray-500 mb-3">पिछले साल के प्रश्न पत्र से अभ्यास करें</p>
+                    <a href="documents/5th to 8th.pdf" target="_blank" download="Previous-Year-Questions-5th-to-8th.pdf" class="pdf-download-btn">
+                        <i class="fas fa-download mr-2"></i> डाउनलोड करें
+                    </a>
+                </div>
+
+                <!-- PDF Item 2 (9th to 12th) -->
+                <div class="pdf-item">
+                    <h4 class="text-lg font-semibold text-gray-700 mb-1">📄 वर्ष 2025 - द्वितीय श्रेणी (कक्षा 9-12)</h4>
+                    <p class="text-sm text-gray-500 mb-3">पिछले साल के प्रश्न पत्र से अभ्यास करें</p>
+                    <a href="documents/9th to 12th.pdf" target="_blank" download="Previous-Year-Questions-9th-to-12th.pdf" class="pdf-download-btn">
+                        <i class="fas fa-download mr-2"></i> डाउनलोड करें
+                    </a>
                 </div>
             </div>
-
-            <div class="info-card" style="background: #fff3cd; border: 1px solid #ffeaa7; color: #856404;">
-                <strong>⚠️ महत्वपूर्ण सूचना:</strong> "ADD A NOTE" में अपना नाम आवश्य डालें जिससे क्विज़ में रजिस्टर किया था, अन्यथा Payment verification में दिक्कत होगी।
-            </div>
-
-            
         </div>
+        <!-- End New Section -->
+
 
         <div class="btn-group">
-            <a href="https://razorpay.me/@yuvachetnasamitijalwar" target="_blank" class="btn btn-primary">
-                <i class="fas fa-credit-card mr-2"></i> Pay with Razorpay
-            </a>
-            
-            <a href="quiz.html" class="btn btn-secondary">
-                <i class="fas fa-arrow-left mr-2"></i> Back to Registration
+            <a href="index.html" class="btn btn-primary">
+                <i class="fas fa-home mr-2"></i> मुख्य पृष्ठ पर वापस जाएं
             </a>
         </div>
         
-        <p class="footer-text mt-6">
-            😊 आप जैसे प्रतिभावान छात्र को हमारी शुभकामनाएँ!
+        <p class="footer-text mt-5">
+            हम आपके उज्जवल भविष्य और शानदार प्रदर्शन की कामना करते हैं!
             <br>
-            आगे बढ़िए और अपनी काबिलियत दिखाइए! 🚀
-            <br>
-            <strong>— युवा चेतना समिति की ओर से ढेरों शुभकामनाएँ! 🎊</strong>
+            <strong>— युवा चेतना समिति, जलवार की ओर से ढेरों शुभकामनाएँ! 🚀</strong>
         </p>
     </div>
     
     <script>
+        // Initialize and fire confetti animation on load
         window.addEventListener('load', function() {
             const jsConfetti = new JSConfetti();
-            jsConfetti.addConfetti();
+            jsConfetti.addConfetti({
+                emojis: ['🏆', '🥇', '🌟', '🎉', '🧠'], // Quiz-specific emojis
+                confettiNumber: 250, 
+                confettiRadius: 8, 
+                confettiColors: [
+                    '#34D399', /* Emerald Green */
+                    '#EC4899', /* Pink */
+                    '#8B5CF6', /* Violet */
+                    '#FBBF24', /* Amber */
+                    '#06b6d4', /* Cyan */
+                ],
+            });
         });
     </script>
 </body>
