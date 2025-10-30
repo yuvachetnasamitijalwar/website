@@ -1,0 +1,23 @@
+Copyright (c) 2025 Yuva Chetna Samiti Jalwar
+All rights reserved.
+
+Permission is hereby granted to any person obtaining a copy
+of this software and associated documentation files (the "Software"),
+to use, copy, modify, and distribute the Software for educational
+or non-commercial purposes only, provided that the above copyright
+notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+For commercial use, reproduction, or distribution, written permission
+from the copyright owner (Yuva Chetna Samiti Jalwar) is required.
+
+Project Owner: Yuva Chetna Samiti Jalwar
+Issued: 23 October 2025
